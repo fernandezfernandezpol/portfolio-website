@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('header.css');
+@import url('sidebar.css');
+@import url('carousel.css');
+@import url('main-buttons.css');
+@import url('footer.css');
+@import url('page-title.css');
+@import url('company-card.css');
+@import url('project-card.css');
+@import url('video-container.css');
+@import url('separator-title.css');
+@import url('vertical-buttons.css');
+@import url('responsive.css');
+
+html, body {
+    margin: 0;
+    padding-top: 95px;
+    background: #f6f6fa;
+}

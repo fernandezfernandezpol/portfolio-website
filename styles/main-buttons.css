@@ -1,0 +1,136 @@
+.main-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin: 64px auto 112px auto;
+    max-width: 900px;
+}
+
+.main-buttons a {
+    text-decoration: none;
+}
+
+.main-btn {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 36px 140px;
+    min-width: 0;
+    border-radius: 32px;
+    border-color: #000;
+    border-width: 2px;
+    border-style: solid;
+    background: #3d3672;
+    color: #fff;
+    font-size: 2.5rem;
+    font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px #0001;
+    min-width: 180px;
+}
+
+.main-btn.contact {
+    padding: 36px 32px;
+    min-width: 120px;
+}
+
+.main-btn.contact.img {
+    min-width: 760px;
+    min-height: 260px;
+    background-image: url('../images/contacto.jpg');
+}
+
+.main-btn.contact.img,
+.main-btn.studies,
+.main-btn.studies-2 {
+    border-radius: 105px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-btn.studies {
+    min-width: 960px;
+    min-height: 460px;
+}
+
+.main-btn.studies-2 {
+    min-width: 525px;
+    min-height: 500px;
+    margin-bottom: -36px;
+}
+
+.main-btn.contact.img,
+.main-btn.studies.double-bachelors,
+.main-btn.studies.background,
+.main-btn.studies-2.aeros,
+.main-btn.studies-2.telecos {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.main-btn.studies.double-bachelors {
+    background-image: url('../images/doble-grado.jpg');
+}
+
+.main-btn.studies.background {
+    background-image: url('../images/background.jpg');
+}
+
+.main-btn.studies-2.aeros {
+    background-image: url('../images/aeros.jpg');
+}
+
+.main-btn.studies-2.telecos {
+    background-image: url('../images/telecos.jpg');
+}
+
+.main-btn:hover {
+    background: #4b438c;
+    transform: translateY(-2px) scale(1.15);
+}
+
+.main-btn.studies.double-bachelors::before,
+.main-btn.studies.background::before,
+.main-btn.studies-2.aeros::before,
+.main-btn.studies-2.telecos::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: background 0.2s;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.main-btn.studies.double-bachelors:hover::before,
+.main-btn.studies.background:hover::before,
+.main-btn.studies-2.aeros:hover::before,
+.main-btn.studies-2.telecos:hover::before {
+    background: #2222229e;
+}
+
+.main-btn span {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    transition: font-size 0.2s;
+    transition: transform 0.2s;
+}
+
+.main-btn:hover span {
+    transform: scale(1.15);
+}
+
+.btn-icon {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
