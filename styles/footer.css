@@ -25,6 +25,18 @@
     min-width: 120px;
 }
 
+.footer-author {
+    font-size: 1.1em;
+}
+
+.footer-copyright-year {
+    display: block;
+    font-size: 0.55em;
+    color: #fff;
+    margin-top: 4px;
+    font-weight: normal;
+}
+
 .footer-center {
     display: flex;
     align-items: center;
@@ -66,8 +78,8 @@
 }
 
 .footer-left a {
-  display: inline-block;
-  margin-top: 12px;
+    display: inline-block;
+    margin-top: 12px;
 }
 
 .footer-left a,
@@ -93,4 +105,19 @@
 .footer-right .scroll-top-link:hover {
     color: #b9b4e2;
     text-decoration: none;
+}
+
+.footer-copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: normal;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 16px auto 8px auto;
+    width: 80%;
 }
