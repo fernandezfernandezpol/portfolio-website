@@ -1,49 +1,41 @@
 export function initFooter() {
     const path = window.location.pathname.split('/').pop();
+    const prefix = (path !== 'index.html' && path !== '') ? '../' : './';
+
+    const logoIndex = document.getElementById('footer-logo-index');
+    if (logoIndex) logoIndex.src = `${prefix}images/logo-index.png`;
+    const logoAeros = document.getElementById('footer-logo-aeros');
+    if (logoAeros) logoAeros.src = `${prefix}images/logo-aeros.png`;
+    const logoTelecos = document.getElementById('footer-logo-telecos');
+    if (logoTelecos) logoTelecos.src = `${prefix}images/logo-telecos.png`;
+
+    const linkAttributions = document.getElementById('footer-attributions');
+    if (linkAttributions) linkAttributions.href = `${prefix}pages/attributions.html`;
+    const linkContact = document.getElementById('footer-contact');
+    const linkAbout = document.getElementById('footer-about');
+
     if (path === 'contact.html') {
-        const footerRight = document.querySelector('.footer-right');
-        if (footerRight) {
-            const link = footerRight.querySelector('a[href*="contact.html"]');
-            if (link) {
-                link.href = '../index.html';
-                link.textContent = 'Inicio';
-            }
+        if (linkContact) {
+            linkContact.href = `${prefix}index.html`;
+            linkContact.textContent = 'Inicio';
         }
-    }
-    else if (path === 'about-me.html') {
-        const footerRight = document.querySelector('.footer-right');
-        if (footerRight) {
-            const link = footerRight.querySelector('a[href*="contact.html"]');
-            if (link) {
-                link.href = '../index.html';
-                link.textContent = 'Inicio';
-            }
+    } else if (path === 'about-me.html' || path === 'attributions.html') {
+        if (linkContact) {
+            linkContact.href = `${prefix}index.html`;
+            linkContact.textContent = 'Inicio';
         }
-        const footerRight2 = document.querySelector('.footer-right');
-        if (footerRight2) {
-            const link = footerRight2.querySelector('a[href*="about-me.html"]');
-            if (link) {
-                link.href = '../pages/contact.html';
-                link.textContent = 'Contacto';
-            }
+        if (linkAbout) {
+            linkAbout.href = `${prefix}pages/contact.html`;
+            linkAbout.textContent = 'Contacto';
         }
-    }
-    else if (path === 'attributions.html') {
-        const footerRight = document.querySelector('.footer-right');
-        if (footerRight) {
-            const link = footerRight.querySelector('a[href*="contact.html"]');
-            if (link) {
-                link.href = '../index.html';
-                link.textContent = 'Inicio';
-            }
+    } else {
+        if (linkContact) {
+            linkContact.href = `${prefix}pages/contact.html`;
+            linkContact.textContent = 'Contacto';
         }
-        const footerRight2 = document.querySelector('.footer-right');
-        if (footerRight2) {
-            const link = footerRight2.querySelector('a[href*="about-me.html"]');
-            if (link) {
-                link.href = '../pages/contact.html';
-                link.textContent = 'Contacto';
-            }
+        if (linkAbout) {
+            linkAbout.href = `${prefix}pages/about-me.html`;
+            linkAbout.textContent = 'Sobre mí';
         }
     }
 }

@@ -1,12 +1,32 @@
 export function initSidebar(config) {
+    const path = window.location.pathname.split('/').pop();
+    const prefix = (path !== 'index.html' && path !== '') ? '../' : './';
+
     const headerLogo = document.getElementById('header-logo');
-    if (headerLogo && config.logo) {
-        headerLogo.src = config.logo;
+    if (headerLogo) {
+        headerLogo.src = config && config.logo ? config.logo : `${prefix}images/logo-index.png`;
     }
     const sidebarLogo = document.getElementById('sidebar-logo');
-    if (sidebarLogo && config.logo) {
-        sidebarLogo.src = config.logo;
+    if (sidebarLogo) {
+        sidebarLogo.src = config && config.logo ? config.logo : `${prefix}images/logo.png`;
     }
+
+    const linkMap = [
+        { id: 'sidebar-inicio', href: `${prefix}index.html` },
+        { id: 'sidebar-about', href: `${prefix}pages/about-me.html` },
+        { id: 'sidebar-studies', href: `${prefix}pages/studies.html` },
+        { id: 'sidebar-double-bachelors', href: `${prefix}pages/double-bachelors.html` },
+        { id: 'sidebar-aeroespace', href: `${prefix}pages/aeroespace.html` },
+        { id: 'sidebar-telecommunitacions', href: `${prefix}pages/telecommunitacions.html` },
+        { id: 'sidebar-background', href: `${prefix}pages/background.html` },
+        { id: 'sidebar-experience', href: `${prefix}pages/experience.html` },
+        { id: 'sidebar-projects', href: `${prefix}pages/projects.html` },
+        { id: 'sidebar-contact', href: `${prefix}pages/contact.html` }
+    ];
+    linkMap.forEach(l => {
+        const el = document.getElementById(l.id);
+        if (el) el.href = l.href;
+    });
 
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
@@ -91,7 +111,7 @@ export function initSidebar(config) {
     if (descargarCV) {
         descargarCV.addEventListener('click', function() {
             const enlace = document.createElement('a');
-            enlace.href = './docs/blank-CV.pdf';
+            enlace.href = `${prefix}docs/blank-CV.pdf`;
             enlace.download = 'CV_POL_FERNANDEZ_FERNANDEZ.pdf';
             document.body.appendChild(enlace);
             enlace.click();
