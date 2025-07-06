@@ -1,0 +1,131 @@
+{
+    "index": {
+        "title": "Inicio",
+        "main": {
+            "workTitle": "Echa un vistazo a mi trabajo:",
+            "githubProfile": "Perfil de GitHub",
+            "linkedinProfile": "Perfil de LinkedIn",
+            "downloadCV": "Descargar CV",
+            "summaryTitle": "Ve un resumen de mi perfil:"
+        },
+        "carousel": {
+            "about-me": "Sobre Mí",
+            "aerospace": "Ingeniería Aeroespacial",
+            "telecom": "Ingeniería en Telecomunicaciones",
+            "experience": "Experiencia",
+            "projects": "Proyectos",
+            "contact": "Contacto",
+            "prev": "Anterior",
+            "next": "Siguiente"
+        },
+        "aria": {
+            "carousel": "Carrusel de navegación principal",
+            "goAbout": "Ir a Sobre Mí",
+            "goAero": "Ir a Ingeniería Aeroespacial",
+            "goTelecom": "Ir a Ingeniería en Telecomunicaciones",
+            "goExperience": "Ir a Experiencia",
+            "goProjects": "Ir a Proyectos",
+            "goContact": "Ir a Contacto",
+            "github": "Abrir perfil de GitHub en una nueva pestaña",
+            "linkedin": "Abrir perfil de LinkedIn en una nueva pestaña",
+            "cv": "Descargar Curriculum Vitae"
+        }
+    },
+    "about-me": {
+        "title": "Sobre Mí"
+    },
+    "aerospace": {
+        "title": "Ingeniería Aeroespacial",
+        "videoTitle": "Vídeo promocional del Grado en Ingeniería Aeroespacial:",
+        "video": "https://www.youtube.com/embed/49akM52EyRc"
+    },
+    "attributions": {
+        "title": "Atribuciones",
+        "logosTitle": "Logotipos e imágenes:",
+        "flaticon": {
+            "gmail": "Flaticon:<br>Gmail icons created by Freepik",
+            "phone": "Flaticon:<br>Phone icons created by Creaticca<br>Creative Agency",
+            "linkedin": "Flaticon:<br>Linkedin icons created by riajulislam",
+            "github": "Flaticon:<br>Github icons created by riajulislam",
+            "youtube": "Flaticon:<br>Youtube icons created by Freepik",
+            "html": "Flaticon:<br>Html icons created by Freepik",
+            "css": "Flaticon:<br>Css 3 icons created by Freepik",
+            "javascript": "Flaticon:<br>Javascript icons created by Pixel<br>perfect"
+        },
+        "matlab": "Georg Stillfried (2025).<br>Matlab Icon for Linux, MATLAB<br>Central File Exchange.<br>"
+    },
+    "background": {
+        "title": "Background"
+    },
+    "contact": {
+        "title": "Contacto",
+        "email-label": "Email:<br>fernandezfernandezpol@gmail.com",
+        "phone-label": "Número de teléfono:<br>Rellena el formulario de contacto",
+        "linkedin-label": "LinkedIn:<br>Pol Fernández Fernández",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "youtube-label": "Youtube:<br>@fernandezfernandezpol"
+    },
+    "double-bachelors": {
+        "title": "Doble Titulación",
+        "heading": "Doble Titulación (Aeros + Telecos)",
+        "video-intro": "Vídeo promocional de la Doble Titulación:",
+        "video": "https://www.youtube.com/embed/spYBItf0Eo8",
+        "more-info": "Descubre un poco más de cada grado por separado:",
+        "aerospace": "Ingeniería<br>Aeroespacial",
+        "telecom": "Ingeniería en Telecomunicaciones"
+    },
+    "experience": {
+        "title": "Experiencia",
+        "click-to-expand": "Pulsa para desplegar descripción",
+        "organizations": "Organizaciones:"
+    },
+    "footer": {
+        "author": "Pol Fernández Fernández",
+        "copyright": "© 2025 Todos los derechos reservados",
+        "attributions": "Atribuciones",
+        "contact": "Contacto",
+        "about": "Sobre mí",
+        "scrollTop": "Volver arriba",
+        "imagesCopyright": "Todas las imágenes de esta web, salvo que se indique lo contrario, son obras originales de Pol Fernández Fernández y están protegidas por derechos de autor.<br>No puedes usar, reproducir o distribuir estas imágenes sin permiso expreso del autor."
+    },
+    "header": {
+        "title": "Encabezado",
+        "name": "Pol<br>Fernández Fernández"
+    },
+    "projects": {
+        "title": "Proyectos",
+        "toggle-description": "▾ Pulsa para desplegar descripción ▾",
+        "all-projects-title": "Para ver todos mis proyectos publicados:",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "more-info-title": "Para más información sobre los proyectos:",
+        "contact-btn": "Contacta conmigo"
+    },
+    "sidebar": {
+        "home": "Inicio",
+        "about": "Sobre mí",
+        "studies": "Estudios",
+        "doubleBachelors": "Doble Titulación (Aeros + Telecos)",
+        "aerospace": "Ingeniería Aeroespacial",
+        "telecom": "Ingeniería en Telecomunicaciones",
+        "background": "Background",
+        "experience": "Experiencia",
+        "projects": "Proyectos",
+        "contact": "Contacto"
+    },
+    "studies": {
+        "title": "Estudios",
+        "double-degree-title": "Doble Titulación:",
+        "degree-aero": "Ingeniería Aeroespacial",
+        "degree-telecom": "Ingeniería en Telecomunicaciones",
+        "background": "Background"
+    },
+    "telecommunications": {
+        "title": "Ingeniería en Telecomunicaciones",
+        "video-promo-title": "Vídeo promocional del Grado en Telecomunicaciones:",
+        "video": "https://www.youtube.com/embed/_tBT3Ansk-k"
+    },
+    "error": {
+        "not_found": "Página no encontrada",
+        "go_home": "Ir al inicio"
+    }
+}

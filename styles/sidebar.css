@@ -50,6 +50,27 @@
     margin: 0 24px 0 24px;
 }
 
+.lang-buttons {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 24px;
+    font-size: 30px;
+    font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s, font-weight 0.3s;
+}
+
+.lang-buttons:hover {
+    color: #b9b4e2;
+    font-weight: bold;
+}
+
+
 .close-btn {
     background: #4e4e4e;
     border: none;

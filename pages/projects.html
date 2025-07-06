@@ -6,18 +6,18 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="icon" type="image/x-icon" href="../images/logo-index.ico">
     <link rel="icon" type="image/png" href="../images/logo-index.png">
-    <title>Proyectos</title>
+    <title data-i18n="title">Proyectos</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div id="include-header"></div>
     <div class="page-title">
-        <h1>Proyectos</h1>
+        <h1 data-i18n="title">Proyectos</h1>
     </div>
-    <!-- Poner enlaces a los repositorios de GitHub donde están los proyectos -->
     <section class="projects-list">
         <div class="project-card">
-            <div class="project-content" onclick="window.open('https://github.com/fernandezfernandezpol/portfolio-website', '_blank')" aria-label="Abrir Portfolio Website en GitHub">
-                <img src="../images/pagina-web.png" alt="Logo página web" class="project-logo">
+            <div class="project-content">
+                <img src="../images/pagina-web.png" alt="Logo página web" class="project-logo" onclick="window.open('https://github.com/fernandezfernandezpol/portfolio-website', '_blank')" aria-label="Abrir Portfolio Website en GitHub">
                 <div class="project-details">
                     <span class="project-name">Portfolio Website</span>
                     <div class="project-badges">
@@ -36,17 +36,13 @@
                     </div>
                 </div>
             </div>
-            <div class="project-extra">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="project-extra" data-md="../content/es/portfolio-website-es.md" data-i18n="toggle-description">
+                &#9662; Pulsa para desplegar descripción &#9662;
             </div>
         </div>
         <div class="project-card">
-            <div class="project-content" onclick="window.open('https://github.com/fernandezfernandezpol/matlab-gui-musical-note-detector', '_blank')" aria-label="Abrir MATLAB GUI Musical Note Detector en GitHub">
-                <img src="../images/matlab-gui.png" alt="Logo página web" class="project-logo">
+            <div class="project-content">
+                <img src="../images/matlab-gui.png" alt="Logo página web" class="project-logo" onclick="window.open('https://github.com/fernandezfernandezpol/matlab-gui-musical-note-detector', '_blank')" aria-label="Abrir MATLAB GUI Musical Note Detector en GitHub">
                 <div class="project-details">
                     <span class="project-name">MATLAB GUI Musical Note Detector</span>
                     <div class="project-badges">
@@ -57,22 +53,18 @@
                     </div>
                 </div>
             </div>
-            <div class="project-extra">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="project-extra" data-md="../content/es/matlab-gui-musical-note-detector-es.md" data-i18n="toggle-description">
+                &#9662; Pulsa para desplegar descripción &#9662;
             </div>
         </div>
         <div class="project-card">
-            <div class="project-content" onclick="window.open('https://github.com/fernandezfernandezpol/python-embedded-web-chat-analyzer', '_blank')" aria-label="Abrir Python Embedded Website Chat Analyzer en GitHub">
-                <img src="../images/python-web.png" alt="Logo página web con python" class="project-logo">
+            <div class="project-content">
+                <img src="../images/python-web.png" alt="Logo página web con python" class="project-logo" onclick="window.open('https://github.com/fernandezfernandezpol/python-embedded-web-chat-analyzer', '_blank')" aria-label="Abrir Python Embedded Website Chat Analyzer en GitHub">
                 <div class="project-details">
                     <span class="project-name">Python embedded website chat analyzer</span>
                     <div class="project-badges">
                         <div class="project-badge">
-                            <img src="../images/python.png" alt="Pyhton logo" class="badge-logo">
+                            <img src="../images/python.png" alt="Python logo" class="badge-logo">
                             <span>Python</span>
                         </div>
                         <div class="project-badge">
@@ -90,32 +82,28 @@
                     </div>
                 </div>
             </div>
-            <div class="project-extra">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="project-extra" data-md="../content/es/python-embedded-web-chat-analyzer-es.md" data-i18n="toggle-description">
+                &#9662; Pulsa para desplegar descripción &#9662;
             </div>
         </div>
     </section>
     <div class="separator-title">
-        <h2>Para ver todos mis proyectos publicados:</h2>
+        <h2 data-i18n="projects.all-projects-title">Para ver todos mis proyectos publicados:</h2>
     </div>
     <div class="vertical-buttons">
         <div class="button-row">
             <button id="visitar-github" class="main-btn contact" onclick="window.open('https://github.com/fernandezfernandezpol', '_blank')">
                 <img src="../images/github.png" alt="GitHub" class="btn-icon">
             </button>
-            <span class="button-label">Github:<br>@fernandezfernandezpol</span>
+            <span class="button-label" data-i18n="projects.github-label">Github:<br>@fernandezfernandezpol</span>
         </div>
     </div>
     <div class="separator-title">
-        <h2>Para más información sobre los proyectos:</h2>
+        <h2 data-i18n="projects.more-info-title">Para más información sobre los proyectos:</h2>
     </div>
     <div class="main-buttons">
         <a href="../pages/contact.html">
-            <button class="main-btn contact img">
+            <button class="main-btn contact img" data-i18n="projects.contact-btn">
                 <span>Contacta conmigo</span>
             </button>
         </a>

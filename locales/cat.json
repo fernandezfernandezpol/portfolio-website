@@ -1,0 +1,131 @@
+{
+    "index": {
+        "title": "Inici",
+        "main": {
+            "workTitle": "Dóna una ullada a la meva feina:",
+            "githubProfile": "Perfil de GitHub",
+            "linkedinProfile": "Perfil de LinkedIn",
+            "downloadCV": "Descarregar CV",
+            "summaryTitle": "Mira un resum del meu perfil:"
+        },
+        "carousel": {
+            "about": "Sobre Mi",
+            "aerospace": "Enginyeria Aeroespacial",
+            "telecom": "Enginyeria en Telecomunicacions",
+            "experience": "Experiència",
+            "projects": "Projectes",
+            "contact": "Contacte",
+            "prev": "Anterior",
+            "next": "Següent"
+        },
+        "aria": {
+            "carousel": "Carrusel de navegació principal",
+            "goAbout": "Anar a Sobre mi",
+            "goAero": "Anar a Enginyeria Aeroespacial",
+            "goTelecom": "Anar a Enginyeria en Telecomunicacions",
+            "goExperience": "Anar a Experiència",
+            "goProjects": "Anar a Projectes",
+            "goContact": "Anar a Contacte",
+            "github": "Obrir el perfil de GitHub en una nova pestanya",
+            "linkedin": "Obrir el perfil de LinkedIn en una nova pestanya",
+            "cv": "Descarregar Currículum Vitae"
+        }
+    },
+    "about-me": {
+        "title": "Sobre mi"
+    },
+    "aerospace": {
+        "title": "Enginyeria Aeroespacial",
+        "videoTitle": "Vídeo promocional del Grau en Enginyeria Aeroespacial:",
+        "video": "https://www.youtube.com/embed/orGhPynsr_I"
+    },
+    "attributions": {
+        "title": "Atribucions",
+        "logosTitle": "Logotips i imatges:",
+        "flaticon": {
+            "gmail": "Flaticon:<br>Icones de Gmail creades per Freepik",
+            "phone": "Flaticon:<br>Icones de telèfon creades per Creaticca<br>Creative Agency",
+            "linkedin": "Flaticon:<br>Icones de Linkedin creades per riajulislam",
+            "github": "Flaticon:<br>Icones de Github creades per riajulislam",
+            "youtube": "Flaticon:<br>Icones de Youtube creades per Freepik",
+            "html": "Flaticon:<br>Icones d'Html creades per Freepik",
+            "css": "Flaticon:<br>Icones de Css 3 creades per Freepik",
+            "javascript": "Flaticon:<br>Icones de Javascript creades per Pixel<br>perfect"
+        },
+        "matlab": "Georg Stillfried (2025).<br>Matlab Icon for Linux, MATLAB<br>Central File Exchange.<br>"
+    },
+    "background": {
+        "title": "Background"
+    },
+    "contact": {
+        "title": "Contacte",
+        "email-label": "Email:<br>fernandezfernandezpol@gmail.com",
+        "phone-label": "Número de telèfon:<br>Omple el formulari de contacte",
+        "linkedin-label": "LinkedIn:<br>Pol Fernández Fernández",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "youtube-label": "Youtube:<br>@fernandezfernandezpol"
+    },
+    "double-bachelors": {
+        "title": "Doble Titulació",
+        "heading": "Doble Titulació (Aeros + Telecos)",
+        "video-intro": "Vídeo promocional de la Doble Titulació:",
+        "video": "https://www.youtube.com/embed/BJtccwA0INg",
+        "more-info": "Descobreix una mica més de cada grau per separat:",
+        "aerospace": "Enginyeria<br>Aeroespacial",
+        "telecom": "Enginyeria en Telecomunicacions"
+    },
+    "experience": {
+        "title": "Experiència",
+        "click-to-expand": "Prem per desplegar la descripció",
+        "organizations": "Organitzacions:"
+    },
+    "footer": {
+        "author": "Pol Fernández Fernández",
+        "copyright": "© 2025 Tots els drets reservats",
+        "attributions": "Atribucions",
+        "contact": "Contacte",
+        "about": "Sobre mi",
+        "scrollTop": "Tornar a dalt",
+        "imagesCopyright": "Totes les imatges d'aquest lloc web, excepte on s'indiqui el contrari, són obres originals creades per Pol Fernández Fernández i estan protegides per drets d'autor.<br>No pots utilitzar, reproduir o distribuir aquestes imatges sense permís explícit de l'autor."
+    },
+    "header": {
+        "title": "Capçalera",
+        "name": "Pol<br>Fernández Fernández"
+    },
+    "projects": {
+        "title": "Projectes",
+        "toggle-description": "▾ Prem per desplegar la descripció ▾",
+        "all-projects-title": "Per veure tots els meus projectes publicats:",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "more-info-title": "Per a més informació sobre els projectes:",
+        "contact-btn": "Contacta amb mi"
+    },
+    "sidebar": {
+        "home": "Inici",
+        "about": "Sobre mi",
+        "studies": "Estudis",
+        "doubleBachelors": "Doble Titulació (Aeros + Telecos)",
+        "aerospace": "Enginyeria Aeroespacial",
+        "telecom": "Enginyeria en Telecomunicacions",
+        "background": "Background",
+        "experience": "Experiència",
+        "projects": "Projectes",
+        "contact": "Contacte"
+    },
+    "studies": {
+        "title": "Estudis",
+        "double-degree-title": "Doble Titulació:",
+        "degree-aero": "Enginyeria Aeroespacial",
+        "degree-telecom": "Enginyeria en Telecomunicacions",
+        "background": "Background"
+    },
+    "telecommunications": {
+        "title": "Enginyeria en Telecomunicacions",
+        "video-promo-title": "Vídeo promocional del Grau en Enginyeria en Telecomunicacions:",
+        "video": "https://www.youtube.com/embed/BimdFZpPcV8-k"
+    },
+    "error": {
+        "not_found": "Pàgina no trobada",
+        "go_home": "Tornar a l'inici"
+    }
+}

@@ -18,6 +18,17 @@
     font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
     width: 90%;
+    position: relative;
+    cursor: pointer;
+    transition: 
+        background 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.project-card:hover {
+    box-shadow: 0 4px 16px #0003;
+    transform: scale(1.03);
 }
 
 .project-content {
@@ -35,7 +46,6 @@
     background: #fff;
     box-shadow: 0 1px 4px #0001;
     min-width: 0;
-    cursor: pointer;
     transition: 
         background 0.2s,
         transform 0.2s,
@@ -104,9 +114,14 @@
 }
 
 .project-extra {
+    display: block;
     margin-top: 24px;
-    font-size: 1.2rem;
-    color: #444;
-    border-top: 1px solid #e0e0e0;
+    font-size: 1.6rem;
+    color: #000;
+    border-top: 2px solid #e0e0e0;
     padding-top: 18px;
+}
+
+.project-extra.hidden {
+    display: none;
 }

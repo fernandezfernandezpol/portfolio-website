@@ -1,0 +1,131 @@
+{
+    "index": {
+        "title": "Home",
+        "main": {
+            "workTitle": "Take a look at my work:",
+            "githubProfile": "GitHub Profile",
+            "linkedinProfile": "LinkedIn Profile",
+            "downloadCV": "Download CV",
+            "summaryTitle": "See a summary of my profile:"
+        },
+        "carousel": {
+            "about": "About Me",
+            "aerospace": "Aerospace Engineering",
+            "telecom": "Telecommunications Engineering",
+            "experience": "Experience",
+            "projects": "Projects",
+            "contact": "Contact",
+            "prev": "Previous",
+            "next": "Next"
+        },
+        "aria": {
+            "carousel": "Main navigation carousel",
+            "goAbout": "Go to About Me",
+            "goAero": "Go to Aerospace Engineering",
+            "goTelecom": "Go to Telecommunications Engineering",
+            "goExperience": "Go to Experience",
+            "goProjects": "Go to Projects",
+            "goContact": "Go to Contact",
+            "github": "Open GitHub profile in a new tab",
+            "linkedin": "Open LinkedIn profile in a new tab",
+            "cv": "Download Curriculum Vitae"
+        }
+    },
+    "about-me": {
+        "title": "About Me"
+    },
+    "aerospace": {
+        "title": "Aerospace Engineering",
+        "videoTitle": "Promotional video of the Aerospace Degree:",
+        "video": "https://www.youtube.com/embed/49akM52EyRc"
+    },
+    "attributions": {
+        "title": "Attributions",
+        "logosTitle": "Logos and images:",
+        "flaticon": {
+            "gmail": "Flaticon:<br>Gmail icons created by Freepik",
+            "phone": "Flaticon:<br>Phone icons created by Creaticca<br>Creative Agency",
+            "linkedin": "Flaticon:<br>Linkedin icons created by riajulislam",
+            "github": "Flaticon:<br>Github icons created by riajulislam",
+            "youtube": "Flaticon:<br>Youtube icons created by Freepik",
+            "html": "Flaticon:<br>Html icons created by Freepik",
+            "css": "Flaticon:<br>Css 3 icons created by Freepik",
+            "javascript": "Flaticon:<br>Javascript icons created by Pixel<br>perfect"
+        },
+        "matlab": "Georg Stillfried (2025).<br>Matlab Icon for Linux, MATLAB<br>Central File Exchange.<br>"
+    },
+    "background": {
+        "title": "Background"
+    },
+    "contact": {
+        "title": "Contact",
+        "email-label": "Email:<br>fernandezfernandezpol@gmail.com",
+        "phone-label": "Phone number:<br>Fill in the contact form",
+        "linkedin-label": "LinkedIn:<br>Pol Fernández Fernández",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "youtube-label": "Youtube:<br>@fernandezfernandezpol"
+    },
+    "double-bachelors": {
+        "title": "Double Degree",
+        "heading": "Double Degree (Aeros + Telecom)",
+        "video-intro": "Promotional video of the Double Degree:",
+        "video": "https://www.youtube.com/embed/spYBItf0Eo8",
+        "more-info": "Discover a bit more about each degree separately:",
+        "aerospace": "Aerospace<br>Engineering",
+        "telecom": "Telecommunications Engineering"
+    },
+    "experience": {
+        "title": "Experience",
+        "click-to-expand": "Click to expand description",
+        "organizations": "Organizations:"
+    },
+    "footer": {
+        "author": "Pol Fernández Fernández",
+        "copyright": "© 2025 All rights reserved",
+        "attributions": "Attributions",
+        "contact": "Contact",
+        "about": "About me",
+        "scrollTop": "Back to top",
+        "imagesCopyright": "All images in this website, except where otherwise indicated, are original works created by Pol Fernández Fernández and are protected by copyright.<br>You may not use, reproduce, or distribute these images without explicit permission from the author."
+    },
+    "header": {
+        "title": "Header",
+        "name": "Pol<br>Fernández Fernández"
+    },
+    "projects": {
+        "title": "Projects",
+        "toggle-description": "▾ Click to expand description ▾",
+        "all-projects-title": "To see all my published projects:",
+        "github-label": "Github:<br>@fernandezfernandezpol",
+        "more-info-title": "For more information about the projects:",
+        "contact-btn": "Contact me"
+    },
+    "sidebar": {
+        "home": "Home",
+        "about": "About me",
+        "studies": "Studies",
+        "doubleBachelors": "Double Degree (Aeros + Telecom)",
+        "aerospace": "Aerospace Engineering",
+        "telecom": "Telecommunications Engineering",
+        "background": "Background",
+        "experience": "Experience",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
+    "studies": {
+        "title": "Studies",
+        "double-degree-title": "Double Degree:",
+        "degree-aero": "Aerospace Engineering",
+        "degree-telecom": "Telecommunications Engineering",
+        "background": "Background"
+    },
+    "telecommunications": {
+        "title": "Telecommunications Engineering",
+        "video-promo-title": "Promotional video of the Telecommunications Degree:",
+        "video": "https://www.youtube.com/embed/_tBT3Ansk-k"
+    },
+    "error": {
+        "not_found": "Page not found",
+        "go_home": "Go to home"
+    }
+}
