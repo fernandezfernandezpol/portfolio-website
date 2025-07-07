@@ -30,29 +30,64 @@ function applyTranslations(translationsObject, prefix = '') {
     });
 }
 
-function fetchTranslations(lang) {
+function getBasePath() {
     const path = window.location.pathname;
-    const isInPages = path.startsWith('/pages/');
-    const pathPrefix = isInPages ? '../locales/' : './locales/';
+    const filename = path.substring(path.lastIndexOf('/') + 1);
+    
+    if (path.includes('/pages/')) {
+        return '../locales/';
+    }
+    else {
+        return './locales/';
+    }
+}
 
-    return fetch(`${pathPrefix}${lang}.json`)
+function fetchTranslations(lang) {
+    const pathPrefix = getBasePath();
+    const fullPath = `${pathPrefix}${lang}.json`;
+    
+    console.log(`Intentando cargar: ${fullPath}`);
+    
+    return fetch(fullPath)
         .then(res => {
-            if (!res.ok) throw new Error(`No se pudo cargar ${pathPrefix}${lang}.json`);
+            if (!res.ok) {
+                const alternativePath = `./locales/${lang}.json`;
+                console.log(`Fallando a: ${alternativePath}`);
+                return fetch(alternativePath);
+            }
+            return res;
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status} - No se pudo cargar ${fullPath}`);
+            }
             return res.json();
+        })
+        .catch(error => {
+            console.error(`Error cargando traducción para ${lang}:`, error);
+            throw error;
         });
 }
 
 function translateAll(lang) {
-    fetchTranslations(lang).then(data => {
-        translationsCache[lang] = data;
-        const page = getPageKey();
-        if (data[page]) applyTranslations(data[page]);
-        if (data.sidebar) applyTranslations(data.sidebar, 'sidebar');
-        if (data.footer) applyTranslations(data.footer, 'footer');
-        if (data.title) document.title = data.title;
+    fetchTranslations(lang)
+        .then(data => {
+            translationsCache[lang] = data;
+            const page = getPageKey();
+            if (data[page]) applyTranslations(data[page]);
+            if (data.sidebar) applyTranslations(data.sidebar, 'sidebar');
+            if (data.footer) applyTranslations(data.footer, 'footer');
+            if (data.title) document.title = data.title;
 
-        updateMarkdownFiles(lang);
-    });
+            updateMarkdownFiles(lang);
+        })
+        .catch(error => {
+            console.error('Error al traducir:', error);
+            if (lang !== 'es') {
+                console.log('Fallback al español');
+                translateAll('es');
+            }
+        });
 }
 
 function loadLanguage(lang) {
@@ -80,41 +115,43 @@ function renderLangButtons(currentLang) {
 }
 
 function updateMarkdownFiles(lang) {
+    const basePath = getBasePath().replace('locales/', 'content/');
+    
     const mdFiles = {
         nanosatlab: {
-            es: "../content/es/nanosatlab-es.md",
-            cat: "../content/cat/nanosatlab-cat.md",
-            en: "../content/en/nanosatlab-en.md",
+            es: `${basePath}es/nanosatlab-es.md`,
+            cat: `${basePath}cat/nanosatlab-cat.md`,
+            en: `${basePath}en/nanosatlab-en.md`,
         },
         profesor: {
-            es: "../content/es/profesor-particular-es.md",
-            cat: "../content/cat/profesor-particular-cat.md",
-            en: "../content/en/profesor-particular-en.md",
+            es: `${basePath}es/profesor-particular-es.md`,
+            cat: `${basePath}cat/profesor-particular-cat.md`,
+            en: `${basePath}en/profesor-particular-en.md`,
         },
         mercadona: {
-            es: "../content/es/mercadona-es.md",
-            cat: "../content/cat/mercadona-cat.md",
-            en: "../content/en/mercadona-en.md",
+            es: `${basePath}es/mercadona-es.md`,
+            cat: `${basePath}cat/mercadona-cat.md`,
+            en: `${basePath}en/mercadona-en.md`,
         },
         euroavia: {
-            es: "../content/es/euroavia-es.md",
-            cat: "../content/cat/euroavia-cat.md",
-            en: "../content/en/euroavia-en.md",
+            es: `${basePath}es/euroavia-es.md`,
+            cat: `${basePath}cat/euroavia-cat.md`,
+            en: `${basePath}en/euroavia-en.md`,
         },
         'portfolio-website': {
-            es: "../content/es/portfolio-website-es.md",
-            cat: "../content/cat/portfolio-website-cat.md",
-            en: "../content/en/portfolio-website-en.md",
+            es: `${basePath}es/portfolio-website-es.md`,
+            cat: `${basePath}cat/portfolio-website-cat.md`,
+            en: `${basePath}en/portfolio-website-en.md`,
         },
         'matlab-gui-musical-note-detector': {
-            es: "../content/es/matlab-gui-musical-note-detector-es.md",
-            cat: "../content/cat/matlab-gui-musical-note-detector-cat.md",
-            en: "../content/en/matlab-gui-musical-note-detector-en.md",
+            es: `${basePath}es/matlab-gui-musical-note-detector-es.md`,
+            cat: `${basePath}cat/matlab-gui-musical-note-detector-cat.md`,
+            en: `${basePath}en/matlab-gui-musical-note-detector-en.md`,
         },
         'python-embedded-web-chat-analyzer': {
-            es: "../content/es/python-embedded-web-chat-analyzer-es.md",
-            cat: "../content/cat/python-embedded-web-chat-analyzer-cat.md",
-            en: "../content/en/python-embedded-web-chat-analyzer-en.md",
+            es: `${basePath}es/python-embedded-web-chat-analyzer-es.md`,
+            cat: `${basePath}cat/python-embedded-web-chat-analyzer-cat.md`,
+            en: `${basePath}en/python-embedded-web-chat-analyzer-en.md`,
         }
     };
 
