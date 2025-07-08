@@ -4,7 +4,7 @@ export function initHeader(config) {
 
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-        headerLogo.src = config && config.logo ? config.logo : `${prefix}images/logo-index.png`;
+        headerLogo.src = config && config.logo ? config.logo : `${prefix}images/logos/logo-index.png`;
     }
 
     const menuToggle = document.getElementById('menu-toggle');

@@ -4,11 +4,11 @@ export function initSidebar(config) {
 
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-        headerLogo.src = config && config.logo ? config.logo : `${prefix}images/logo-index.png`;
+        headerLogo.src = config && config.logo ? config.logo : `${prefix}images/logos/logo-index.png`;
     }
     const sidebarLogo = document.getElementById('sidebar-logo');
     if (sidebarLogo) {
-        sidebarLogo.src = config && config.logo ? config.logo : `${prefix}images/logo.png`;
+        sidebarLogo.src = config && config.logo ? config.logo : `${prefix}images/logos/logo.png`;
     }
 
     const linkMap = [

@@ -4,20 +4,17 @@ const prefix = (filename !== 'index.html' && filename !== '') ? '../' : './';
 const page = filename.replace('.html', '');
 
 const pageConfigs = {
-    "aeroespace": {
-        logo: `${prefix}images/logo-aeros.png`,
+    "aerospace": {
+        logo: `${prefix}images/logos/logo-aeros.png`,
         text: "Ingeniería Aeroespacial"
     },
-    "background": {
-        logo: `${prefix}images/logo-index.png`,
-    },
-    "telecommunitacions": {
-        logo: `${prefix}images/logo-telecos.png`,
+    "telecommunications": {
+        logo: `${prefix}images/logos/logo-telecos.png`,
     }
 };
 
 const defaultConfig = {
-    logo: `${prefix}images/logo-index.png`
+    logo: `${prefix}images/logos/logo-index.png`
 };
 
 export const config = {

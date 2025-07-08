@@ -11,6 +11,9 @@
 @import url('separator-title.css');
 @import url('vertical-buttons.css');
 @import url('responsive.css');
+@import url('left-photo.css');
+@import url('apartados.css');
+@import url('right-photo.css');
 
 html, body {
     margin: 0;

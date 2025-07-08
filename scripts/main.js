@@ -7,6 +7,8 @@ import { initCarousel } from '../scripts/carousel.js';
 import { initFooter } from '../scripts/footer.js';
 import { setupCardsToggle } from '../scripts/card-description.js';
 import { initLanguageSwitcher } from '../scripts/change-lang.js';
+import { handleImageScrollEffectLeft } from '../scripts/left-photo.js';
+import { handleImageScrollEffectRight } from '../scripts/right-photo.js';
 
 let fragmentsLoaded = 0;
 
@@ -17,6 +19,8 @@ function checkInit() {
       initCarousel();
       setupCardsToggle();
       initLanguageSwitcher();
+      handleImageScrollEffectLeft();
+      handleImageScrollEffectRight();
     }
 }
 

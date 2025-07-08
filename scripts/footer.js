@@ -3,11 +3,11 @@ export function initFooter() {
     const prefix = (path !== 'index.html' && path !== '') ? '../' : './';
 
     const logoIndex = document.getElementById('footer-logo-index');
-    if (logoIndex) logoIndex.src = `${prefix}images/logo-index.png`;
+    if (logoIndex) logoIndex.src = `${prefix}images/logos/logo-index.png`;
     const logoAeros = document.getElementById('footer-logo-aeros');
-    if (logoAeros) logoAeros.src = `${prefix}images/logo-aeros.png`;
+    if (logoAeros) logoAeros.src = `${prefix}images/logos/logo-aeros.png`;
     const logoTelecos = document.getElementById('footer-logo-telecos');
-    if (logoTelecos) logoTelecos.src = `${prefix}images/logo-telecos.png`;
+    if (logoTelecos) logoTelecos.src = `${prefix}images/logos/logo-telecos.png`;
 
     const linkAttributions = document.getElementById('footer-attributions');
     if (linkAttributions) linkAttributions.href = `${prefix}pages/attributions.html`;

@@ -42,7 +42,7 @@
 .main-btn.contact.img {
     min-width: 760px;
     min-height: 260px;
-    background-image: url('../images/contacto.jpg');
+    background-image: url('../images/fotos/contacto.jpg');
 }
 
 .main-btn.contact.img,
@@ -77,19 +77,19 @@
 }
 
 .main-btn.studies.double-bachelors {
-    background-image: url('../images/doble-grado.jpg');
+    background-image: url('../images/fotos/doble-grado.jpg');
 }
 
 .main-btn.studies.background {
-    background-image: url('../images/background.jpg');
+    background-image: url('../images/fotos/background.jpg');
 }
 
 .main-btn.studies-2.aeros {
-    background-image: url('../images/aeros.jpg');
+    background-image: url('../images/fotos/aeros.jpg');
 }
 
 .main-btn.studies-2.telecos {
-    background-image: url('../images/telecos.jpg');
+    background-image: url('../images/fotos/telecos.jpg');
 }
 
 .main-btn:hover {
