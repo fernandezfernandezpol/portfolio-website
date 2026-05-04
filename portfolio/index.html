@@ -23,7 +23,7 @@
       --font-body:    'Public Sans', sans-serif;
       --font-mono:    'DM Mono', monospace;
       --max:  980px;
-      --pad:  clamp(1.5rem, 5vw, 4rem);
+      --pad:  clamp(1.25rem, 4.5vw, 4rem);
       --nav:  74px;
     }
 
@@ -122,7 +122,7 @@
 
     .proj {
       display: grid;
-      grid-template-columns: 56px 1fr 240px;
+      grid-template-columns: 56px 1fr clamp(160px, 22vw, 240px);
       grid-template-areas: "year body thumb";
       gap: 0 clamp(1.5rem, 4vw, 3.5rem);
       align-items: start;
@@ -226,6 +226,9 @@
     .r { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .r.in { opacity: 1; transform: none; }
 
+    @media (max-width: 620px) {
+      .nav-links { gap: 1.25rem; }
+    }
     @media (max-width: 600px) {
       .proj {
         grid-template-columns: 50px 1fr;
@@ -241,7 +244,15 @@
       .proj-year { padding-top: 0; }
     }
     @media (max-width: 480px) {
-      .nav-links { gap: 1.25rem; }
+      .nav-name { display: none; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.85rem; }
+      .proj { grid-template-columns: 44px 1fr; }
+    }
+    @media (max-width: 380px) {
+      .nav-links { gap: 0.85rem; }
+      .nav-links a { font-size: 0.8rem; }
+      .nav-links li:nth-last-child(-n+2) { display: none; }
     }
   </style>
 </head>

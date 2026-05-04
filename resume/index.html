@@ -24,7 +24,7 @@
       --font-body:    'Public Sans', sans-serif;
       --font-mono:    'DM Mono', monospace;
       --max:  900px;
-      --pad:  clamp(1.5rem, 5vw, 4rem);
+      --pad:  clamp(1.25rem, 4.5vw, 4rem);
       --nav:  74px;
     }
 
@@ -84,7 +84,7 @@
     .resume {
       background: #fff;
       border: 1px solid var(--border);
-      padding: clamp(2.5rem, 6vw, 4.5rem);
+      padding: clamp(1.5rem, 5vw, 4.5rem);
     }
 
     /* ── HEADER ── */
@@ -351,10 +351,23 @@
     .r { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .r.in { opacity: 1; transform: none; }
 
+    @media (max-width: 620px) {
+      .nav-links { gap: 1.25rem; }
+    }
     @media (max-width: 600px) {
       .cv-edu-entry, .cv-exp-header { grid-template-columns: 1fr; }
       .cv-edu-date { grid-column: 1; }
-      .nav-links { gap: 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-name { display: none; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.85rem; }
+      .cv-contacts { gap: 0.4rem 1rem; }
+    }
+    @media (max-width: 380px) {
+      .nav-links { gap: 0.85rem; }
+      .nav-links a { font-size: 0.8rem; }
+      .nav-links li:nth-last-child(-n+2) { display: none; }
     }
   </style>
 </head>

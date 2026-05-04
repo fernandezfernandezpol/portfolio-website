@@ -23,7 +23,7 @@
       --font-body:    'Public Sans', sans-serif;
       --font-mono:    'DM Mono', monospace;
       --max:  980px;
-      --pad:  clamp(1.5rem, 5vw, 4rem);
+      --pad:  clamp(1.25rem, 4.5vw, 4rem);
       --nav:  74px;
     }
 
@@ -93,7 +93,9 @@
     /* ── HERO ── */
     .hero {
       position: relative;
-      height: 100vh; min-height: 560px;
+      height: 100vh;
+      height: 100dvh;
+      min-height: 480px;
       background: #0a0908;
       overflow: hidden;
     }
@@ -145,7 +147,6 @@
       letter-spacing: -0.02em;
       color: #ffffff;
       margin-bottom: 1.25rem;
-      white-space: nowrap;
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.75s 0.55s ease forwards;
@@ -234,7 +235,6 @@
       letter-spacing: -0.02em;
       line-height: 1.1;
       margin-bottom: 0.35rem;
-      white-space: nowrap;
     }
     .about-role {
       font-family: var(--font-mono);
@@ -311,10 +311,18 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 620px) {
       .about { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-photo { width: 280px; aspect-ratio: 1; margin-left: 0; }
+      .about-photo { width: min(280px, 100%); aspect-ratio: 1; margin-left: 0; }
+      .nav-links { gap: 1.25rem; }
     }
     @media (max-width: 480px) {
-      .nav-links { gap: 1.25rem; }
+      .nav-name { display: none; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.85rem; }
+    }
+    @media (max-width: 380px) {
+      .nav-links { gap: 0.85rem; }
+      .nav-links a { font-size: 0.8rem; }
+      .nav-links li:nth-last-child(-n+2) { display: none; }
     }
   </style>
 </head>
