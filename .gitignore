@@ -1,0 +1,17 @@
+# Source CV PDF — kept locally as the source-of-truth for resume.html, but
+# never committed: it contains personal contact info (phone) that must not
+# be served, and is not referenced from any HTML on the site.
+CV_*.pdf
+*.pdf
+
+# Claude Code — local guidance and per-project settings, not for the public repo.
+CLAUDE.md
+.claude/
+.claude.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

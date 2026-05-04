@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Selected work by Pol Fernández — small-satellite ADCS, MATLAB simulation with Helmholtz coils, and hardware systems for orbital environments." />
+  <title>Portfolio — Pol Fernández</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,700..900&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; }
+    :root {
+      --bg:     #f0ede7;
+      --text:   #141210;
+      --muted:  #5c5752;
+      --border: #d5d0c8;
+      --faint:  #9c9690;
+      --warm:   #b08d72;
+      --font-heading: 'Inter', sans-serif;
+      --font-body:    'Public Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+      --max:  980px;
+      --pad:  clamp(1.5rem, 5vw, 4rem);
+      --nav:  74px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--pad);
+      background: rgba(240,237,231,0.96);
+      backdrop-filter: blur(12px);
+      transition: opacity 0.45s ease;
+    }
+    nav.hidden { opacity: 0; pointer-events: none; }
+
+    .nav-name {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+    }
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 500; }
+    .nav-icon {
+      display: flex; align-items: center;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-icon:hover { color: var(--text); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--nav) + clamp(3.5rem, 7vw, 6rem)) var(--pad) clamp(2rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .page-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.9rem;
+    }
+    .page-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .page-count {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--faint);
+      letter-spacing: 0.1em;
+      align-self: flex-end;
+      padding-bottom: 0.2rem;
+    }
+
+    /* ── PROJECTS LIST ── */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) clamp(5rem, 10vw, 8rem);
+    }
+
+    .proj {
+      display: grid;
+      grid-template-columns: 56px 1fr 240px;
+      grid-template-areas: "year body thumb";
+      gap: 0 clamp(1.5rem, 4vw, 3.5rem);
+      align-items: start;
+      padding: clamp(2rem, 3.5vw, 2.75rem) 0;
+      border-bottom: 1px solid var(--border);
+      color: inherit;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .proj:hover { background: rgba(20,18,16,0.02); }
+    .proj:hover .proj-thumb img { transform: scale(1.04); }
+    .proj:hover .proj-name {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .proj-year {
+      grid-area: year;
+      padding-top: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--faint);
+      text-transform: uppercase;
+    }
+
+    .proj-body { grid-area: body; }
+    .proj-name {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .proj-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 1rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      background: rgba(255,255,255,0.4);
+    }
+
+    .proj-thumb {
+      grid-area: thumb;
+      align-self: stretch;
+      background: transparent;
+      overflow: hidden;
+    }
+    .proj-thumb.empty { background: #ddd8cf; }
+    .proj-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.45s ease;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.25rem var(--pad);
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer span {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--faint);
+      letter-spacing: 0.06em;
+    }
+    .footer-links { display: flex; gap: 1.5rem; align-items: center; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: color 0.15s;
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── REVEAL ── */
+    .r { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .r.in { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .proj {
+        grid-template-columns: 50px 1fr;
+        grid-template-areas:
+          "thumb thumb"
+          "year  body";
+        row-gap: 1.1rem;
+      }
+      .proj-thumb {
+        align-self: auto;
+        aspect-ratio: 16 / 9;
+      }
+      .proj-year { padding-top: 0; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="../" class="nav-name">Pol Fernández Fernández</a>
+  <ul class="nav-links">
+    <li><a href="../">Home</a></li>
+    <li><a href="./" class="active">Portfolio</a></li>
+    <li><a href="../resume/">Resume</a></li>
+    <li><a href="../contact/">Contact</a></li>
+    <li>
+      <a href="https://linkedin.com/in/pol-fernández-fernández" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/fernandezfernandezpol" target="_blank" rel="noopener" aria-label="GitHub" class="nav-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header r">
+  <div>
+    <p class="page-kicker">Selected work</p>
+    <h1 class="page-title">Projects Portfolio</h1>
+  </div>
+  <span class="page-count">04 entries</span>
+</div>
+
+<!-- PROJECTS -->
+<main>
+
+  <a class="proj r" href="#">
+    <span class="proj-year">2025</span>
+    <div class="proj-body">
+      <p class="proj-name">PoCAT-Lektron Mission (ESA FYS! 4)</p>
+      <p class="proj-desc">3-axis detumbling system using hysteresis rods, later upgraded to active magnetorquer torque control with H-bridge actuation. MATLAB simulations of attitude dynamics, detumbling performance and nadir-pointing control.</p>
+      <div class="tags">
+        <span class="tag">MATLAB</span>
+        <span class="tag">ADCS</span>
+        <span class="tag">Attitude control</span>
+        <span class="tag">ESA</span>
+        <span class="tag">CubeSat</span>
+      </div>
+    </div>
+    <div class="proj-thumb">
+      <img src="../images/portfolio/PQ.jpg" alt="PoCAT-Lektron mission" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
+    </div>
+  </a>
+
+  <a class="proj r" href="#">
+    <span class="proj-year">2025</span>
+    <div class="proj-body">
+      <p class="proj-name">ADCS Simulation with Helmholtz Coils — UPC INIREC</p>
+      <p class="proj-desc">Real-time MATLAB simulation and control app for orbital experiments using Helmholtz coils. Camera-based angular rate estimation for motion tracking in simulated orbital conditions.</p>
+      <div class="tags">
+        <span class="tag">MATLAB</span>
+        <span class="tag">Helmholtz coils</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Control</span>
+      </div>
+    </div>
+    <div class="proj-thumb">
+      <img src="../images/portfolio/HCApp.jpg" alt="ADCS simulation with Helmholtz coils" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
+    </div>
+  </a>
+
+  <a class="proj r" href="#">
+    <span class="proj-year">2025</span>
+    <div class="proj-body">
+      <p class="proj-name">Illumination System for Solar Simulation</p>
+      <p class="proj-desc">Hardware illumination system designed to replicate solar lighting conditions for simulated orbital environments. Developed at the UPC NanoSat Lab with rigorous documentation of all code and experimental procedures.</p>
+      <div class="tags">
+        <span class="tag">Hardware</span>
+        <span class="tag">Electronics</span>
+        <span class="tag">NanoSat Lab</span>
+        <span class="tag">Orbital simulation</span>
+      </div>
+    </div>
+    <div class="proj-thumb">
+      <img src="../images/portfolio/Arch.jpg" alt="Illumination system for solar simulation" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
+    </div>
+  </a>
+
+  <a class="proj r" href="#">
+    <span class="proj-year">2022–</span>
+    <div class="proj-body">
+      <p class="proj-name">Aerospace Engineering — Major in Air Navigation</p>
+      <p class="proj-desc">Dual bachelor's program in Aerospace Systems and Telecommunications Systems Engineering at UPC BarcelonaTech. Specialization in orbital mechanics, aerodynamics, electromagnetism and embedded systems design applied to space platforms.</p>
+      <div class="tags">
+        <span class="tag">UPC</span>
+        <span class="tag">Aerospace</span>
+        <span class="tag">Telecommunications</span>
+        <span class="tag">Air Navigation</span>
+      </div>
+    </div>
+    <div class="proj-thumb">
+      <img src="../images/portfolio/Spacewalk.jpg" alt="Aerospace Engineering degree" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
+    </div>
+  </a>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Pol Fernández Fernández</span>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/pol-fernández-fernández" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/fernandezfernandezpol" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub
+    </a>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  const nav = document.getElementById('nav');
+  let lastY = 0, ticking = false;
+  function updateNav() {
+    const y = window.scrollY;
+    if (y < 60) { nav.classList.remove('hidden'); }
+    else if (y > lastY + 4) { nav.classList.add('hidden'); }
+    else if (y < lastY - 4) { nav.classList.remove('hidden'); }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
+  }, { passive: true });
+</script>
+</body>
+</html>

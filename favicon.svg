@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+
+  <style>
+    path { fill: #141210; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #f0ede7; }
+    }
+  </style>
+
+  <!-- 4-pointed star, concave curves between tips -->
+  <!-- Tips: top(50,8) right(92,50) bottom(50,92) left(8,50) -->
+  <!-- Control points pulled toward center (50,50) -->
+  <path d="
+    M 50 8
+    Q 59 41 92 50
+    Q 59 59 50 92
+    Q 41 59 8 50
+    Q 41 41 50 8
+    Z"/>
+
+</svg>
