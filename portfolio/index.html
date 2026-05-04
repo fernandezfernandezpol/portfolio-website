@@ -126,18 +126,25 @@
       grid-template-areas: "year body thumb";
       gap: 0 clamp(1.5rem, 4vw, 3.5rem);
       align-items: start;
-      padding: clamp(2rem, 3.5vw, 2.75rem) 0;
+      padding: clamp(2rem, 3.5vw, 2.75rem) 1.25rem;
+      margin: 0 -1.25rem;
       border-bottom: 1px solid var(--border);
+      border-radius: 6px;
       color: inherit;
       text-decoration: none;
-      transition: background 0.2s ease;
+      transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
     }
-    .proj:hover { background: rgba(20,18,16,0.02); }
-    .proj:hover .proj-thumb img { transform: scale(1.04); }
-    .proj:hover .proj-name {
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 4px;
+    .proj:hover {
+      background: rgba(176,141,114,0.06);
+      box-shadow: 0 2px 16px rgba(20,18,16,0.06);
+      transform: translateY(-2px);
+    }
+    .proj:hover .proj-thumb { transform: scale(1.05); }
+    .proj:hover .proj-name { text-shadow: 0 0 0.4px var(--text); }
+    .proj:hover .proj-year { color: var(--warm); }
+    .proj:hover .tag {
+      border-color: var(--warm);
+      color: var(--muted);
     }
 
     .proj-year {
@@ -148,6 +155,7 @@
       letter-spacing: 0.14em;
       color: var(--faint);
       text-transform: uppercase;
+      transition: color 0.3s ease;
     }
 
     .proj-body { grid-area: body; }
@@ -180,6 +188,7 @@
       border: 1px solid var(--border);
       padding: 0.2rem 0.55rem;
       background: rgba(255,255,255,0.4);
+      transition: border-color 0.3s ease, color 0.3s ease;
     }
 
     .proj-thumb {
@@ -187,12 +196,14 @@
       align-self: stretch;
       background: transparent;
       overflow: hidden;
+      border-radius: 4px;
+      transform-origin: center;
+      transition: transform 0.45s ease;
     }
     .proj-thumb.empty { background: #ddd8cf; }
     .proj-thumb img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
-      transition: transform 0.45s ease;
     }
 
     /* ── FOOTER ── */
@@ -288,17 +299,15 @@
         top: 0; right: 0;
         height: 100vh;
         height: 100dvh;
-        width: min(85vw, 320px);
+        width: 100vw;
         background: var(--bg);
         flex-direction: column;
         align-items: stretch;
-        padding: calc(var(--nav) + 1.25rem) 2rem 2rem;
+        padding: calc(var(--nav) + 1.25rem) var(--pad) 2rem;
         gap: 0;
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 200;
-        border-left: 1px solid var(--border);
-        box-shadow: -12px 0 28px rgba(0,0,0,0.08);
         overflow-y: auto;
       }
       nav.open .nav-links { transform: translateX(0); }
@@ -376,13 +385,13 @@
     <p class="page-kicker">Selected work</p>
     <h1 class="page-title">Projects Portfolio</h1>
   </div>
-  <span class="page-count">04 entries</span>
+  <span class="page-count">03 entries</span>
 </div>
 
 <!-- PROJECTS -->
 <main>
 
-  <a class="proj r" href="#">
+  <a class="proj r" href="pocat-lektron/">
     <span class="proj-year">2025</span>
     <div class="proj-body">
       <p class="proj-name">PoCAT-Lektron Mission - ESA FYS! 4</p>
@@ -400,7 +409,7 @@
     </div>
   </a>
 
-  <a class="proj r" href="#">
+  <a class="proj r" href="adcs-helmholtz/">
     <span class="proj-year">2025</span>
     <div class="proj-body">
       <p class="proj-name">ADCS Simulation with Helmholtz Coils</p>
@@ -417,7 +426,7 @@
     </div>
   </a>
 
-  <a class="proj r" href="#">
+  <a class="proj r" href="solar-illumination/">
     <span class="proj-year">2025</span>
     <div class="proj-body">
       <p class="proj-name">Illumination System for Solar Simulation</p>
@@ -431,37 +440,6 @@
     </div>
     <div class="proj-thumb">
       <img src="../images/portfolio/Arch.jpg" alt="Illumination system for solar simulation" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
-    </div>
-  </a>
-
-  <a class="proj r" href="#">
-    <span class="proj-year">2022–2028</span>
-    <div class="proj-body">
-      <p class="proj-name">Aerospace Engineering</p>
-      <p class="proj-desc">Aerospace Systems Engineering - Major in Air Navigation at UPC BarcelonaTech.</p>
-      <div class="tags">
-        <span class="tag">UPC</span>
-        <span class="tag">Aerospace</span>
-        <span class="tag">Air Navigation</span>
-      </div>
-    </div>
-    <div class="proj-thumb">
-      <img src="../images/portfolio/Spacewalk.jpg" alt="Aerospace Engineering degree" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
-    </div>
-  </a>
-
-    <a class="proj r" href="#">
-    <span class="proj-year">2022–2028</span>
-    <div class="proj-body">
-      <p class="proj-name">Telecommunitacions Engineering</p>
-      <p class="proj-desc">Telecommunitacions Systems Engineering at UPC BarcelonaTech.</p>
-      <div class="tags">
-        <span class="tag">UPC</span>
-        <span class="tag">Telecommunications</span>
-      </div>
-    </div>
-    <div class="proj-thumb">
-      <img src="../images/portfolio/MadridDeepSpace.jpg" alt="Aerospace Engineering degree" onerror="this.style.display='none'; this.parentElement.classList.add('empty');" />
     </div>
   </a>
 
@@ -494,7 +472,7 @@
   const navToggle   = document.querySelector('.nav-toggle');
   const navBackdrop = document.getElementById('nav-backdrop');
 
-  let lastY = 0, ticking = false, stopTimer = null;
+  let lastY = 0, ticking = false;
   function updateNav() {
     const y = window.scrollY;
     if (!nav.classList.contains('open')) {
@@ -507,10 +485,6 @@
   }
   window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
-    clearTimeout(stopTimer);
-    stopTimer = setTimeout(() => {
-      if (!nav.classList.contains('open')) nav.classList.remove('hidden');
-    }, 220);
   }, { passive: true });
 
   // ── Drawer ──

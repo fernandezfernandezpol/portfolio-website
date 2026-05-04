@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src https://contact-form.polfdz13.workers.dev; base-uri 'self'; form-action 'none'; frame-ancestors 'none';">
-  <meta name="description" content="Pol Fernández — Aerospace and Telecommunications Engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB simulation." />
-  <title>Pol Fernández — Portfolio</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="ADCS Simulation with Helmholtz Coils — real-time MATLAB simulation and control app for orbital experiments, with camera-based angular rate estimation." />
+  <title>ADCS Simulation with Helmholtz Coils — Pol Fernández</title>
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,700..900&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 17px; }
+    html { font-size: 17px; }
     :root {
       --bg:     #f0ede7;
       --text:   #141210;
@@ -44,13 +42,9 @@
       height: var(--nav);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 var(--pad);
-      background: transparent;
-      border-bottom: none;
-      transition: opacity 0.45s ease, background 0.35s ease;
-    }
-    nav.solid {
       background: rgba(240,237,231,0.96);
       backdrop-filter: blur(12px);
+      transition: opacity 0.45s ease;
     }
     nav.hidden { opacity: 0; pointer-events: none; }
 
@@ -59,11 +53,8 @@
       font-size: 1.05rem;
       font-weight: 800;
       letter-spacing: 0.04em;
-      color: #fff;
-      transition: color 0.35s;
+      color: var(--text);
     }
-    nav.solid .nav-name { color: var(--text); }
-
     .nav-links {
       list-style: none;
       display: flex;
@@ -73,211 +64,216 @@
     .nav-links a {
       font-size: 0.92rem;
       font-weight: 400;
-      color: rgba(255,255,255,0.65);
+      color: var(--muted);
       letter-spacing: 0.04em;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a.active { color: #fff; font-weight: 500; }
-    nav.solid .nav-links a { color: var(--muted); }
-    nav.solid .nav-links a:hover { color: var(--text); }
-    nav.solid .nav-links a.active { color: var(--text); font-weight: 500; }
-
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 500; }
     .nav-icon {
       display: flex; align-items: center;
-      color: rgba(255,255,255,0.65);
+      color: var(--muted);
       transition: color 0.2s;
     }
-    .nav-icon:hover { color: #fff; }
-    nav.solid .nav-icon { color: var(--muted); }
-    nav.solid .nav-icon:hover { color: var(--text); }
+    .nav-icon:hover { color: var(--text); }
 
-    /* ── HERO ── */
-    .hero {
+    /* ── HAMBURGER + DRAWER ── */
+    .nav-toggle {
+      display: none;
       position: relative;
-      height: 100vh;
-      height: 100dvh;
-      min-height: 480px;
-      background: #0a0908;
-      overflow: hidden;
+      width: 36px; height: 36px;
+      background: none; border: none;
+      padding: 0; cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s;
+      z-index: 220;
     }
-    .hero img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.55;
+    nav.open .nav-toggle { color: var(--text); }
+    .nav-toggle span {
+      position: absolute; left: 7px;
       display: block;
-      transform: scale(var(--hero-scale, 1.3));
-      transform-origin: center center;
-      will-change: transform;
+      width: 22px; height: 1.5px;
+      background: currentColor;
+      transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 13px; }
+    .nav-toggle span:nth-child(2) { top: 18px; }
+    .nav-toggle span:nth-child(3) { top: 23px; }
+    nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: rotate(45deg); }
+    nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+    nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: rotate(-45deg); }
+
+    .nav-social { display: contents; }
+
+    .nav-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(20,18,16,0.45);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 190;
+    }
+    .nav-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    body.no-scroll, html.no-scroll { overflow: hidden; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--nav) + clamp(3.5rem, 7vw, 6rem)) var(--pad) clamp(2rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .page-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.9rem;
+    }
+    .page-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .page-back {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--faint);
+      align-self: flex-end;
+      padding-bottom: 0.2rem;
+      transition: color 0.15s;
+    }
+    .page-back:hover { color: var(--text); }
+
+    /* ── CASE BODY ── */
+    .case-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(2.5rem, 5vw, 4rem) var(--pad) clamp(4rem, 8vw, 6rem);
     }
 
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(10,9,8,0.15) 0%,
-        rgba(10,9,8,0)    40%,
-        rgba(10,9,8,0.72) 100%
-      );
+    .case-hero-figure { margin: 0 0 clamp(2.5rem, 5vw, 4rem); }
+    .case-hero-figure img {
+      display: block;
+      max-width: 100%;
+      max-height: 70vh;
+      margin: 0 auto;
+    }
+    .case-hero-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+      margin-top: 0.7rem;
     }
 
-    .hero-content {
-      position: absolute;
-      bottom: clamp(3.5rem, 8vw, 6rem);
-      left: var(--pad);
-      right: var(--pad);
-      z-index: 2;
-    }
-    .hero-label {
+    .case-section + .case-section { margin-top: clamp(2.5rem, 5vw, 4rem); }
+    .case-section h2 {
       font-family: var(--font-mono);
       font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 0.9rem;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.7s 0.4s ease forwards;
+      color: var(--warm);
+      margin-bottom: 1.4rem;
     }
-    .hero-name {
+    .case-section h3 {
       font-family: var(--font-heading);
-      font-size: clamp(1.6rem, 5.2vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.05;
+      font-size: 1.4rem;
+      font-weight: 700;
       letter-spacing: -0.02em;
-      color: #ffffff;
-      margin-bottom: 1.25rem;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.75s 0.55s ease forwards;
+      line-height: 1.25;
+      margin-bottom: 0.9rem;
     }
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.7s 0.75s ease forwards;
+    .case-section p {
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.85;
+      text-align: justify;
+      hyphens: auto;
     }
-    .hero-role {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.03em;
+    .case-section p + p { margin-top: 1rem; }
+    .case-section p + h3 { margin-top: 1.8rem; }
+    .case-section ul { list-style: none; margin-top: 0.5rem; }
+    .case-section ul li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.85;
     }
-    .hero-divider {
-      width: 1px; height: 14px;
-      background: rgba(255,255,255,0.25);
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: #fff;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 1px;
-      transition: border-color 0.2s;
-    }
-    .hero-cta:hover { border-color: #fff; }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: none; }
+    .case-section ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--warm);
     }
 
-    /* ── ABOUT ── */
-    .about {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: clamp(5rem, 10vw, 8rem) var(--pad);
-      display: grid;
-      grid-template-columns: 400px 1fr;
-      gap: clamp(3rem, 7vw, 6rem);
-      align-items: start;
+    .case-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.25rem;
     }
-
-    .about-photo {
-      width: 400px;
-      aspect-ratio: 3 / 4;
-      background: #ddd8cf;
-      overflow: hidden;
-      flex-shrink: 0;
-      margin-left: -1.5rem;
-    }
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      background: #ddd8cf;
-      color: var(--faint);
+    .case-tag {
       font-family: var(--font-mono);
       font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .about-kicker {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--faint);
-      margin-bottom: 1.1rem;
-    }
-    .about-name {
-      font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 2.6vw, 1.8rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 0.35rem;
-    }
-    .about-role {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--warm);
-      letter-spacing: 0.04em;
-      margin-bottom: 2rem;
-    }
-    .about-bio {
-      font-size: 0.9375rem;
-      color: var(--muted);
-      line-height: 1.9;
-      max-width: 480px;
-    }
-    .about-bio p + p { margin-top: 0.9rem; }
-
-    .about-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2.25rem;
-      flex-wrap: wrap;
-    }
-    .about-link {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2px;
-      transition: border-color 0.2s, color 0.2s;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      background: rgba(255,255,255,0.4);
     }
-    .about-link:hover { border-color: var(--text); }
 
-    /* ── SEPARATOR ── */
-    .section-sep {
+    .case-figure { margin: clamp(2rem, 4vw, 3rem) 0; }
+    .case-figure img {
+      display: block;
+      max-width: 100%;
+      max-height: 70vh;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    .case-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+      margin-top: 0.7rem;
+      text-align: center;
+    }
+    .case-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 2.5vw, 1.75rem);
+      margin: clamp(2rem, 4vw, 3rem) 0;
+    }
+    .case-grid-2 .case-figure { margin: 0; }
+
+    .case-bottom-nav {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 var(--pad);
+      padding: clamp(2rem, 4vw, 3rem) var(--pad);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
     }
-    .section-sep hr { border: none; border-top: 1px solid var(--border); }
+    .case-bottom-nav a {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .case-bottom-nav a:hover { color: var(--text); }
 
     /* ── FOOTER ── */
     footer {
@@ -307,56 +303,8 @@
     .footer-links a:hover { color: var(--text); }
 
     /* ── REVEAL ── */
-    .r { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .r { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .r.in { opacity: 1; transform: none; }
-
-    /* ── HAMBURGER + DRAWER ── */
-    .nav-toggle {
-      display: none;
-      position: relative;
-      width: 36px; height: 36px;
-      background: none; border: none;
-      padding: 0; cursor: pointer;
-      color: rgba(255,255,255,0.9);
-      transition: color 0.35s;
-      z-index: 220;
-    }
-    nav.solid .nav-toggle, nav.open .nav-toggle { color: var(--text); }
-    .nav-toggle span {
-      position: absolute; left: 7px;
-      display: block;
-      width: 22px; height: 1.5px;
-      background: currentColor;
-      transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
-    }
-    .nav-toggle span:nth-child(1) { top: 13px; }
-    .nav-toggle span:nth-child(2) { top: 18px; }
-    .nav-toggle span:nth-child(3) { top: 23px; }
-    nav.open .nav-toggle span:nth-child(1) { top: 18px; transform: rotate(45deg); }
-    nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
-    nav.open .nav-toggle span:nth-child(3) { top: 18px; transform: rotate(-45deg); }
-
-    .nav-social { display: contents; }
-
-    nav.open { background: rgba(240,237,231,0.98); backdrop-filter: blur(12px); }
-    nav.open .nav-name { color: var(--text); }
-
-    .nav-backdrop {
-      position: fixed; inset: 0;
-      background: rgba(20,18,16,0.45);
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 190;
-    }
-    .nav-backdrop.open { opacity: 1; pointer-events: auto; }
-
-    body.no-scroll, html.no-scroll { overflow: hidden; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 620px) {
-      .about { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-photo { width: min(280px, 100%); aspect-ratio: 1; margin-left: 0; }
-    }
 
     @media (max-width: 720px) {
       .nav-toggle { display: block; }
@@ -382,8 +330,7 @@
       .nav-links > li:not(.nav-social) {
         border-bottom: 1px solid var(--border);
       }
-      .nav-links > li:not(.nav-social) a,
-      nav.solid .nav-links > li:not(.nav-social) a {
+      .nav-links > li:not(.nav-social) a {
         display: block;
         color: var(--text);
         font-family: var(--font-heading);
@@ -392,10 +339,7 @@
         padding: 1.2rem 0;
         letter-spacing: 0.01em;
       }
-      .nav-links > li:not(.nav-social) a.active,
-      nav.solid .nav-links > li:not(.nav-social) a.active {
-        font-weight: 700;
-      }
+      .nav-links > li:not(.nav-social) a.active { font-weight: 700; }
 
       .nav-social {
         display: flex;
@@ -404,8 +348,7 @@
         margin-top: auto;
         padding-top: 2rem;
       }
-      .nav-social .nav-icon,
-      nav.solid .nav-social .nav-icon {
+      .nav-social .nav-icon {
         color: var(--muted);
         width: 24px; height: 24px;
         display: inline-flex; align-items: center; justify-content: center;
@@ -413,6 +356,14 @@
       .nav-social .nav-icon:hover { color: var(--text); }
     }
 
+    @media (max-width: 600px) {
+      .case-grid-2 { grid-template-columns: 1fr; }
+      .case-bottom-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+      }
+    }
     @media (max-width: 480px) {
       .nav-name { font-size: 0.92rem; }
     }
@@ -425,15 +376,15 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="./" class="nav-name">Pol Fernández Fernández</a>
+  <a href="../../" class="nav-name">Pol Fernández Fernández</a>
   <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="./" class="active">Home</a></li>
-    <li><a href="portfolio/">Portfolio</a></li>
-    <li><a href="resume/">Resume</a></li>
-    <li><a href="contact/">Contact</a></li>
+    <li><a href="../../">Home</a></li>
+    <li><a href="../" class="active">Portfolio</a></li>
+    <li><a href="../../resume/">Resume</a></li>
+    <li><a href="../../contact/">Contact</a></li>
     <li class="nav-social">
       <a href="https://linkedin.com/in/pol-fernández-fernández" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-icon">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -450,47 +401,67 @@
 </nav>
 <div class="nav-backdrop" id="nav-backdrop"></div>
 
-<!-- HERO -->
-<div class="hero">
-  <img
-    src="images/ArtemisMoon.jpg"
-    alt="Orbital view — NASA, Artemis II"
-  />
-  <div class="hero-content">
-    <h1 class="hero-name">Hi,<br>I'm Pol Fernández Fernández</h1>
-    <div class="hero-meta">
-      <span class="hero-role">Aerospace &amp; Telecommunications Engineering Undergraduate</span>
-    </div>
+<!-- PAGE HEADER -->
+<div class="page-header r">
+  <div>
+    <p class="page-kicker">Case study · 2025</p>
+    <h1 class="page-title">ADCS Simulation with Helmholtz Coils</h1>
   </div>
+  <a href="../" class="page-back">← Portfolio</a>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about">
-    <div class="r">
-      <div class="about-photo">
-        <img src="images/Pol.jpg" alt="Pol Fernández" />
-        <!-- div class="photo-placeholder">Your<br>photo</div> -->
-      </div>
-    </div>
-    <div class="r">
-      <p class="about-kicker">About</p>
-      <h2 class="about-name">Pol Fernández Fernández</h2>
-      <p class="about-role">Aerospace &amp; Telecommunications Engineering · UPC BarcelonaTech</p>
-      <div class="about-bio">
-        <p>Aerospace and telecommunications engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB-based simulation.</p>
-      </div>
-      <div class="about-links">
-        <a href="portfolio/" class="about-link">Portfolio →</a>
-        <a href="resume/" class="about-link">Resume →</a>
-        <a href="contact/" class="about-link">Contact →</a>
-        <a href="https://linkedin.com/in/pol-fernández-fernández" target="_blank" rel="noopener" class="about-link">LinkedIn →</a>
-        <a href="https://github.com/fernandezfernandezpol" target="_blank" rel="noopener" class="about-link">GitHub →</a>
-      </div>
+<!-- BODY -->
+<main class="case-wrap">
 
+  <figure class="case-hero-figure r">
+    <img src="../../images/portfolio/HCApp.jpg" alt="ADCS simulation with Helmholtz coils" />
+  </figure>
+
+  <section class="case-section r">
+    <h2>Overview</h2>
+    <p>A real-time MATLAB simulation and control application for orbital experiments using Helmholtz coils. The system reproduces the magnetic environment a satellite would face in orbit and lets us test attitude-control strategies on hardware before flight.</p>
+    <div class="case-tags">
+      <span class="case-tag">MATLAB</span>
+      <span class="case-tag">Helmholtz coils</span>
+      <span class="case-tag">Computer Vision</span>
+      <span class="case-tag">Control</span>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="case-section r">
+    <h2>What I built</h2>
+    <h3>Real-time simulation app</h3>
+    <p>The app drives the Helmholtz-coil currents in real time to recreate the geomagnetic field expected along an orbit, while running the satellite's attitude dynamics in parallel so the magnetic environment and the spacecraft state stay synchronised throughout the experiment.</p>
+    <h3>Camera-based angular rate estimation</h3>
+    <p>Instead of relying solely on inertial sensors, angular rates are estimated from a camera looking at the test article — feature tracking gives a redundant motion measurement that is useful both for ground-test debugging and for closing the loop on visual cues.</p>
+  </section>
+
+  <section class="case-section r">
+    <h2>Highlights</h2>
+    <ul>
+      <li>Real-time control of Helmholtz coil currents synchronised with the simulated orbital position.</li>
+      <li>Camera-based angular rate estimation as an independent motion-tracking channel.</li>
+      <li>MATLAB control app with a unified interface for running, logging, and replaying experiments.</li>
+    </ul>
+  </section>
+
+  <!--
+    To add more images or gifs to this page, drop them into
+    /images/portfolio/adcs-helmholtz/ and copy this block:
+
+    <figure class="case-figure r">
+      <img src="../../images/portfolio/adcs-helmholtz/your-file.gif" alt="..." />
+      <figcaption>Your caption.</figcaption>
+    </figure>
+  -->
+
+</main>
+
+<!-- BOTTOM NAV -->
+<div class="case-bottom-nav">
+  <a href="../pocat-lektron/">← PoCAT-Lektron Mission</a>
+  <a href="../solar-illumination/">Illumination System for Solar Simulation →</a>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -512,48 +483,28 @@
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.r').forEach(el => io.observe(el));
 
   const nav         = document.getElementById('nav');
   const navToggle   = document.querySelector('.nav-toggle');
   const navBackdrop = document.getElementById('nav-backdrop');
-  const hero        = document.querySelector('.hero');
-  const heroImg     = hero ? hero.querySelector('img') : null;
-  const HERO_SCALE_START = 1.3;
-  const HERO_SCALE_END   = 1.0;
 
   let lastY = 0, ticking = false;
-
   function updateNav() {
     const y = window.scrollY;
-    const heroH = hero ? hero.offsetHeight : 0;
-
-    if (heroImg && heroH > 0) {
-      const progress = Math.min(Math.max(y / heroH, 0), 1);
-      const scale = HERO_SCALE_START + (HERO_SCALE_END - HERO_SCALE_START) * progress;
-      heroImg.style.setProperty('--hero-scale', scale.toFixed(4));
-    }
-
     if (!nav.classList.contains('open')) {
-      if (y < heroH * 0.85) nav.classList.remove('solid');
-      else nav.classList.add('solid');
-
-      if (y < 80) nav.classList.remove('hidden');
+      if (y < 60) nav.classList.remove('hidden');
       else if (y > lastY + 6) nav.classList.add('hidden');
       else if (y < lastY - 2) nav.classList.remove('hidden');
     }
     lastY = y;
     ticking = false;
   }
-
   window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
   }, { passive: true });
 
-  updateNav();
-
-  // ── Drawer ──
   function openNav() {
     nav.classList.add('open');
     navBackdrop.classList.add('open');
