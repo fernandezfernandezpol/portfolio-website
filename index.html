@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src https://contact-form.polfdz13.workers.dev; base-uri 'self'; form-action 'none'; frame-ancestors 'none';">
   <meta name="description" content="Pol Fernández — Aerospace and Telecommunications Engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB simulation." />
-  <title>Pol Fernández — Portfolio</title>
+  <title>Pol Fernández | Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +24,7 @@
       --font-heading: 'Inter', sans-serif;
       --font-body:    'Public Sans', sans-serif;
       --font-mono:    'DM Mono', monospace;
-      --max:  980px;
+      --max:  1100px;
       --pad:  clamp(1.25rem, 4.5vw, 4rem);
       --nav:  74px;
     }
@@ -229,6 +229,7 @@
       text-transform: uppercase;
       color: var(--faint);
       margin-bottom: 1.1rem;
+      text-align: center;
     }
     .about-name {
       font-family: var(--font-heading);
@@ -237,6 +238,7 @@
       letter-spacing: -0.02em;
       line-height: 1.1;
       margin-bottom: 0.35rem;
+      text-align: center;
     }
     .about-role {
       font-family: var(--font-mono);
@@ -244,12 +246,14 @@
       color: var(--warm);
       letter-spacing: 0.04em;
       margin-bottom: 2rem;
+      text-align: center;
     }
     .about-bio {
       font-size: 0.9375rem;
       color: var(--muted);
       line-height: 1.9;
       max-width: 480px;
+      text-align: center;
     }
     .about-bio p + p { margin-top: 0.9rem; }
 
@@ -258,6 +262,7 @@
       gap: 1.5rem;
       margin-top: 2.25rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .about-link {
       font-family: var(--font-mono);
@@ -273,7 +278,7 @@
 
     /* ── SEPARATOR ── */
     .section-sep {
-      max-width: var(--max);
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 var(--pad);
     }
@@ -283,7 +288,7 @@
     footer {
       border-top: 1px solid var(--border);
       padding: 2.25rem var(--pad);
-      max-width: var(--max);
+      max-width: 980px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -470,7 +475,6 @@
     <div class="r">
       <div class="about-photo">
         <img src="images/Pol.jpg" alt="Pol Fernández" />
-        <!-- div class="photo-placeholder">Your<br>photo</div> -->
       </div>
     </div>
     <div class="r">
@@ -478,14 +482,14 @@
       <h2 class="about-name">Pol Fernández Fernández</h2>
       <p class="about-role">Aerospace &amp; Telecommunications Engineering · UPC BarcelonaTech</p>
       <div class="about-bio">
-        <p>Aerospace and telecommunications engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB-based simulation.</p>
+        <p>Aerospace and telecommunications engineering undergraduate at UPC BarcelonaTech, specializing in small-satellite ADCS, 
+          embedded control and MATLAB-based simulation. Currently seeking a curricular internship in the aerospace or telecommunications 
+          industry. Driven by a passion for space systems and a genuine interest in contributing to real-world missions.</p>
       </div>
       <div class="about-links">
         <a href="portfolio/" class="about-link">Portfolio →</a>
         <a href="resume/" class="about-link">Resume →</a>
         <a href="contact/" class="about-link">Contact →</a>
-        <a href="https://linkedin.com/in/pol-fernández-fernández" target="_blank" rel="noopener" class="about-link">LinkedIn →</a>
-        <a href="https://github.com/fernandezfernandezpol" target="_blank" rel="noopener" class="about-link">GitHub →</a>
       </div>
 
     </div>
@@ -553,23 +557,32 @@
 
   updateNav();
 
-  // ── Drawer ──
+// ── Drawer ──
+  let navWasHidden = false; // track whether nav was hidden before opening
+
   function openNav() {
+    navWasHidden = nav.classList.contains('hidden');
     nav.classList.add('open');
+    nav.classList.add('solid');
+    nav.classList.remove('hidden');
     navBackdrop.classList.add('open');
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Close menu');
     document.documentElement.classList.add('no-scroll');
     document.body.classList.add('no-scroll');
-    nav.classList.remove('hidden');
   }
   function closeNav() {
     nav.classList.remove('open');
+    nav.classList.remove('solid');
     navBackdrop.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open menu');
     document.documentElement.classList.remove('no-scroll');
     document.body.classList.remove('no-scroll');
+    // restore hidden state and let updateNav take over again
+    if (navWasHidden) nav.classList.add('hidden');
+    // force a nav update to recalculate correct state
+    setTimeout(updateNav, 10);
   }
   navToggle.addEventListener('click', () => {
     nav.classList.contains('open') ? closeNav() : openNav();
