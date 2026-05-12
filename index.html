@@ -514,6 +514,7 @@
 </footer>
 
 <script>
+  // ── Reveal on scroll ──
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -529,79 +530,45 @@
   const HERO_SCALE_START = 1.3;
   const HERO_SCALE_END   = 1.0;
 
+  // ── Nav hide/show + solid ──
   let lastY = 0, ticking = false;
 
-  // Quorum logic: cross-check scroll position from THREE sources and the hero's
-  // bounding rect. On iOS during URL-bar animations either signal can lie briefly,
-  // so we require BOTH to agree before removing solid (the dangerous direction).
-  // Adding solid is permissive — either signal is enough.
-  function applyNavSolid() {
-    if (!hero || nav.classList.contains('open')) return;
-    const heroH = Math.max(hero.offsetHeight || 0, 400);
-    const y = Math.max(
-      window.pageYOffset || 0,
-      document.documentElement.scrollTop || 0,
-      document.body.scrollTop || 0
-    );
-    const rectBottom = hero.getBoundingClientRect().bottom;
-
-    // "Past hero" if EITHER signal says so → add solid (permissive)
-    if (y > heroH * 0.8 || rectBottom < heroH * 0.2) {
-      nav.classList.add('solid');
-    }
-    // "In hero" only if BOTH signals agree → remove solid (strict)
-    else if (y < heroH * 0.4 && rectBottom > heroH * 0.6) {
-      nav.classList.remove('solid');
-    }
-    // else: hysteresis band — keep current state
-  }
-
   function updateNav() {
-    try {
-      const y = window.pageYOffset;
-      const heroH = hero ? hero.offsetHeight : 0;
+    const y = window.scrollY;
+    const heroH = hero ? hero.offsetHeight : 0;
 
-      if (heroImg && heroH > 0) {
-        const progress = Math.min(Math.max(y / heroH, 0), 1);
-        const scale = HERO_SCALE_START + (HERO_SCALE_END - HERO_SCALE_START) * progress;
-        heroImg.style.setProperty('--hero-scale', scale.toFixed(4));
-      }
-
-      if (!nav.classList.contains('open')) {
-        applyNavSolid();
-        if (y < 80)              nav.classList.remove('hidden');
-        else if (y > lastY + 6)  nav.classList.add('hidden');
-        else if (y < lastY - 2)  nav.classList.remove('hidden');
-      }
-      lastY = y;
-    } finally {
-      ticking = false;  // always reset, even if something throws — prevents stuck rAF queue
+    // Parallax scale on hero image
+    if (heroImg && heroH > 0) {
+      const progress = Math.min(Math.max(y / heroH, 0), 1);
+      const scale = HERO_SCALE_START + (HERO_SCALE_END - HERO_SCALE_START) * progress;
+      heroImg.style.setProperty('--hero-scale', scale.toFixed(4));
     }
+
+    // Solid background: switch once we leave the hero
+    if (!nav.classList.contains('open')) {
+      if (y > heroH * 0.8) nav.classList.add('solid');
+      else if (y < heroH * 0.4) nav.classList.remove('solid');
+    }
+
+    // Hide/show on scroll direction — identical logic to resume page
+    if (!nav.classList.contains('open')) {
+      if (y < 60)              nav.classList.remove('hidden');
+      else if (y > lastY + 6)  nav.classList.add('hidden');
+      else if (y < lastY - 2)  nav.classList.remove('hidden');
+    }
+
+    lastY = y;
+    ticking = false;
   }
 
-  const schedule = () => {
+  window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
-  };
-  window.addEventListener('scroll',    schedule, { passive: true });
-  window.addEventListener('touchmove', schedule, { passive: true });
-  // Direct-call applyNavSolid on critical events — bypasses rAF in case it's
-  // suspended during iOS momentum scrolling. Also re-check after URL-bar animation.
-  window.addEventListener('touchend', () => {
-    applyNavSolid();
-    setTimeout(applyNavSolid, 400);
   }, { passive: true });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', applyNavSolid);
-    window.visualViewport.addEventListener('scroll', applyNavSolid);
-  }
 
   updateNav();
 
-// ── Drawer ──
-  let navWasHidden = false; // track whether nav was hidden before opening
-
+  // ── Drawer ──
   function openNav() {
-    navWasHidden = nav.classList.contains('hidden');
     nav.classList.add('open');
     nav.classList.add('solid');
     nav.classList.remove('hidden');
@@ -613,16 +580,12 @@
   }
   function closeNav() {
     nav.classList.remove('open');
-    applyNavSolid();
     navBackdrop.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open menu');
     document.documentElement.classList.remove('no-scroll');
     document.body.classList.remove('no-scroll');
-    // restore hidden state and let updateNav take over again
-    if (navWasHidden) nav.classList.add('hidden');
-    // force a nav update to recalculate correct state
-    setTimeout(updateNav, 10);
+    updateNav(); // recalculate correct solid + hidden state immediately
   }
   navToggle.addEventListener('click', () => {
     nav.classList.contains('open') ? closeNav() : openNav();
@@ -637,7 +600,7 @@
     });
   });
   window.addEventListener('resize', () => {
-    schedule();
+    if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
     if (window.innerWidth > 720 && nav.classList.contains('open')) closeNav();
   });
 </script>
