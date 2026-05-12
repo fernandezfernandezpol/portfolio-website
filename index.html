@@ -531,12 +531,18 @@
 
   let lastY = 0, ticking = false;
 
-  function applyNavSolid(y) {
-    const heroH = hero ? hero.offsetHeight : 0;
-    // hysteresis: add solid past 80% of hero, remove only at very top (<40px)
-    if (y > heroH * 0.8)  nav.classList.add('solid');
-    else if (y < 40)      nav.classList.remove('solid');
-    // between 40px and 80% of hero: keep whatever state is already set
+  // Solid state is derived from the hero's LIVE viewport position (getBoundingClientRect),
+  // not from pageYOffset — on iOS, pageYOffset can lag/glitch during URL-bar animations
+  // and 100dvh changes, but getBoundingClientRect always reflects the real on-screen layout.
+  function applyNavSolid() {
+    if (!hero || nav.classList.contains('open')) return;
+    const rect  = hero.getBoundingClientRect();
+    const heroH = rect.height || hero.offsetHeight || 600;
+    // rect.bottom = y-coordinate of hero's bottom edge relative to viewport top.
+    // Negative or small = hero scrolled past. Large = hero still visible.
+    if (rect.bottom < heroH * 0.15)     nav.classList.add('solid');     // ≥85% past hero
+    else if (rect.bottom > heroH * 0.5) nav.classList.remove('solid');  // hero clearly visible
+    // hysteresis band between 0.15h and 0.5h: keep current state
   }
 
   function updateNav() {
@@ -550,22 +556,27 @@
     }
 
     if (!nav.classList.contains('open')) {
-      applyNavSolid(y);
-      if (y < 80)          nav.classList.remove('hidden');
+      applyNavSolid();
+      if (y < 80)              nav.classList.remove('hidden');
       else if (y > lastY + 6)  nav.classList.add('hidden');
-      else if (y < lastY - 2) nav.classList.remove('hidden');
+      else if (y < lastY - 2)  nav.classList.remove('hidden');
     }
     lastY = y;
     ticking = false;
   }
 
-  const scheduleUpdate = () => {
+  const schedule = () => {
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
   };
-  window.addEventListener('scroll',    scheduleUpdate, { passive: true });
-  window.addEventListener('touchmove', scheduleUpdate, { passive: true });
-  // re-check after finger lifts — iOS URL bar animation may shift pageYOffset
-  window.addEventListener('touchend', () => setTimeout(() => applyNavSolid(window.pageYOffset), 150), { passive: true });
+  window.addEventListener('scroll',    schedule, { passive: true });
+  window.addEventListener('touchmove', schedule, { passive: true });
+  // After finger lifts, momentum is still settling and URL bar may animate — re-check twice.
+  window.addEventListener('touchend',  () => { schedule(); setTimeout(schedule, 400); }, { passive: true });
+  // iOS URL bar show/hide fires visualViewport events — pick up the new layout immediately.
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', schedule);
+    window.visualViewport.addEventListener('scroll', schedule);
+  }
 
   updateNav();
 
@@ -585,7 +596,7 @@
   }
   function closeNav() {
     nav.classList.remove('open');
-    applyNavSolid(window.pageYOffset);
+    applyNavSolid();
     navBackdrop.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open menu');
@@ -609,6 +620,7 @@
     });
   });
   window.addEventListener('resize', () => {
+    schedule();
     if (window.innerWidth > 720 && nav.classList.contains('open')) closeNav();
   });
 </script>
