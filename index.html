@@ -529,21 +529,18 @@
   const HERO_SCALE_START = 1.3;
   const HERO_SCALE_END   = 1.0;
 
-  let lastY = 0, ticking = false, heroInView = true;
+  let lastY = 0, ticking = false;
 
-  // IntersectionObserver controls solid/transparent — avoids iOS scrollY quirks
-  if (hero) {
-    new IntersectionObserver(([entry]) => {
-      heroInView = entry.isIntersecting;
-      if (!nav.classList.contains('open')) {
-        if (heroInView) nav.classList.remove('solid');
-        else nav.classList.add('solid');
-      }
-    }, { threshold: 0.15 }).observe(hero);
+  function applyNavSolid(y) {
+    const heroH = hero ? hero.offsetHeight : 0;
+    // hysteresis: add solid past 80% of hero, remove only at very top (<40px)
+    if (y > heroH * 0.8)  nav.classList.add('solid');
+    else if (y < 40)      nav.classList.remove('solid');
+    // between 40px and 80% of hero: keep whatever state is already set
   }
 
   function updateNav() {
-    const y = window.scrollY;
+    const y = window.pageYOffset;
     const heroH = hero ? hero.offsetHeight : 0;
 
     if (heroImg && heroH > 0) {
@@ -553,17 +550,22 @@
     }
 
     if (!nav.classList.contains('open')) {
-      if (y < 80) nav.classList.remove('hidden');
-      else if (y > lastY + 6) nav.classList.add('hidden');
+      applyNavSolid(y);
+      if (y < 80)          nav.classList.remove('hidden');
+      else if (y > lastY + 6)  nav.classList.add('hidden');
       else if (y < lastY - 2) nav.classList.remove('hidden');
     }
     lastY = y;
     ticking = false;
   }
 
-  window.addEventListener('scroll', () => {
+  const scheduleUpdate = () => {
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
-  }, { passive: true });
+  };
+  window.addEventListener('scroll',    scheduleUpdate, { passive: true });
+  window.addEventListener('touchmove', scheduleUpdate, { passive: true });
+  // re-check after finger lifts — iOS URL bar animation may shift pageYOffset
+  window.addEventListener('touchend', () => setTimeout(() => applyNavSolid(window.pageYOffset), 150), { passive: true });
 
   updateNav();
 
@@ -583,8 +585,7 @@
   }
   function closeNav() {
     nav.classList.remove('open');
-    if (heroInView) nav.classList.remove('solid');
-    else nav.classList.add('solid');
+    applyNavSolid(window.pageYOffset);
     navBackdrop.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open menu');
