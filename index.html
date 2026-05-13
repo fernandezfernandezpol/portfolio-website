@@ -531,7 +531,7 @@
   const HERO_SCALE_END   = 1.0;
 
   // ── Nav hide/show + solid ──
-  let lastY = window.scrollY, ticking = false;
+  let lastY = 0, ticking = false;
 
   function updateNav() {
     const y = window.scrollY;
@@ -550,9 +550,9 @@
       else if (y < heroH * 0.4) nav.classList.remove('solid');
     }
 
-    // Hide/show on scroll direction
+    // Hide/show on scroll direction - identical logic to resume page
     if (!nav.classList.contains('open')) {
-      if (y <= 0 || y < 60)   nav.classList.remove('hidden');
+      if (y < 60)              nav.classList.remove('hidden');
       else if (y > lastY + 6)  nav.classList.add('hidden');
       else if (y < lastY - 2)  nav.classList.remove('hidden');
     }
@@ -562,18 +562,6 @@
   }
 
   window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
-  }, { passive: true });
-
-  // iOS fix: reset lastY on each new touch so momentum scroll
-  // from a previous flick doesn't confuse the direction logic
-  window.addEventListener('touchstart', () => {
-    lastY = window.scrollY;
-  }, { passive: true });
-
-  // Re-evaluate when momentum scroll fully stops (Safari 16.4+)
-  window.addEventListener('scrollend', () => {
-    lastY = window.scrollY;
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
   }, { passive: true });
 
