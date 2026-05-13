@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src https://contact-form.polfdz13.workers.dev; base-uri 'self'; form-action 'none'; frame-ancestors 'none';">
-  <meta name="description" content="Pol Fernández — Aerospace and Telecommunications Engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB simulation." />
+  <meta name="description" content="Pol Fernandez - Aerospace and Telecommunications Engineering undergraduate at UPC BarcelonaTech. Research in small-satellite ADCS, embedded control and MATLAB simulation." />
   <title>Pol Fernández | Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="images/favicons/favicon.svg" />
   <link rel="icon" type="image/png" href="images/favicons/favicon.png" />
@@ -461,7 +461,7 @@
 <div class="hero">
   <img
     src="images/ArtemisMoon.jpg"
-    alt="Orbital view — NASA, Artemis II"
+    alt="Orbital view, NASA Artemis II"
   />
   <div class="hero-content">
     <h1 class="hero-name">Hi,<br>I'm Pol Fernández Fernández</h1>
@@ -531,7 +531,7 @@
   const HERO_SCALE_END   = 1.0;
 
   // ── Nav hide/show + solid ──
-  let lastY = 0, ticking = false;
+  let lastY = window.scrollY, ticking = false;
 
   function updateNav() {
     const y = window.scrollY;
@@ -550,9 +550,9 @@
       else if (y < heroH * 0.4) nav.classList.remove('solid');
     }
 
-    // Hide/show on scroll direction — identical logic to resume page
+    // Hide/show on scroll direction
     if (!nav.classList.contains('open')) {
-      if (y < 60)              nav.classList.remove('hidden');
+      if (y <= 0 || y < 60)   nav.classList.remove('hidden');
       else if (y > lastY + 6)  nav.classList.add('hidden');
       else if (y < lastY - 2)  nav.classList.remove('hidden');
     }
@@ -562,6 +562,18 @@
   }
 
   window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
+  }, { passive: true });
+
+  // iOS fix: reset lastY on each new touch so momentum scroll
+  // from a previous flick doesn't confuse the direction logic
+  window.addEventListener('touchstart', () => {
+    lastY = window.scrollY;
+  }, { passive: true });
+
+  // Re-evaluate when momentum scroll fully stops (Safari 16.4+)
+  window.addEventListener('scrollend', () => {
+    lastY = window.scrollY;
     if (!ticking) { requestAnimationFrame(updateNav); ticking = true; }
   }, { passive: true });
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PoCAT-Lektron Mission — ADCS design for an ESA Fly Your Satellite! 4 CubeSat: hysteresis-rod detumbling, magnetorquer active control, and MATLAB attitude simulations." />
+  <meta name="description" content="PoCAT-Lektron Mission - ADCS design for an ESA Fly Your Satellite! 4 PocketQube: hysteresis-rod detumbling, magnetorquer active control, and MATLAB attitude simulations." />
   <title>PoCAT-Lektron Mission | Pol Fernández</title>
   <link rel="icon" type="image/svg+xml" href="../../images/favicons/favicon.svg" />
   <link rel="icon" type="image/png" href="../../images/favicons/favicon.png" />
@@ -164,7 +164,7 @@
       padding: clamp(2.5rem, 5vw, 4rem) var(--pad) clamp(4rem, 8vw, 6rem);
     }
 
-    /* Hero figure — the differentiator: big project image right under the header */
+    /* Hero figure - big project image right under the header */
     .case-hero-figure {
       margin: 0 0 clamp(2.5rem, 5vw, 4rem);
     }
@@ -275,7 +275,6 @@
       max-width: var(--max);
       margin: 0 auto;
       padding: clamp(2rem, 4vw, 3rem) var(--pad);
-      border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; flex-wrap: wrap;
     }
@@ -319,6 +318,24 @@
     /* ── REVEAL ── */
     .r { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .r.in { opacity: 1; transform: none; }
+
+    /* ── FIGURE PLACEHOLDER ── */
+    .case-figure-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      border: 1.5px dashed var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-figure-placeholder span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
 
     @media (max-width: 720px) {
       .nav-toggle { display: block; }
@@ -418,7 +435,7 @@
 <!-- PAGE HEADER -->
 <div class="page-header r">
   <div>
-    <p class="page-kicker">Case study · 2025</p>
+    <p class="page-kicker">2025 - Present</p>
     <h1 class="page-title">PoCAT-Lektron Mission</h1>
   </div>
   <a href="../" class="page-back">← Portfolio</a>
@@ -433,22 +450,30 @@
 
   <section class="case-section r">
     <h2>Overview</h2>
-    <p>PoCAT-Lektron is a CubeSat mission selected for the European Space Agency's <em>Fly Your Satellite! 4</em> educational programme. My contribution focused on the Attitude Determination &amp; Control System (ADCS) — the subsystem responsible for stabilising the spacecraft after deployment and pointing it toward Earth for its science phase.</p>
+    <p>PoCAT-Lektron is a PocketQube mission selected for the European Space Agency's <em>Fly Your Satellite! 4</em> programme, developed at UPC NanoSat Lab. The mission deploys two 1P PocketQubes (50×50×50 mm) carrying K-band and L-band passive radiometers to monitor radio-frequency interference, collecting RFI data that helps characterise interference affecting atmospheric water-vapour measurements and navigation signals. My role is the Attitude Determination &amp; Control System (ADCS), responsible for stabilising both spacecraft after deployment and pointing them toward their science targets.</p>
     <div class="case-tags">
       <span class="case-tag">MATLAB</span>
       <span class="case-tag">ADCS</span>
       <span class="case-tag">Attitude control</span>
       <span class="case-tag">ESA</span>
-      <span class="case-tag">CubeSat</span>
+      <span class="case-tag">PocketQube</span>
     </div>
   </section>
 
   <section class="case-section r">
     <h2>What I built</h2>
     <h3>Passive detumbling with hysteresis rods</h3>
-    <p>The first iteration of the ADCS used hysteresis rods to passively dissipate the angular momentum the satellite picks up during deployment. I modelled the rods, ran detumbling simulations, and characterised the convergence time across the expected initial-tipoff envelope.</p>
+    <p>The first iteration of the ADCS used hysteresis rods to passively dissipate the angular momentum the satellite picks up during deployment. The ESA advisors set a detumbling requirement of an initial angular rate of 90°/s for the spacecraft. I modelled the rods, ran detumbling simulations, and characterised the convergence time across the expected initial-tipoff envelope.</p>
+    <figure class="case-figure r">
+      <img src="../../images/portfolio/Angular_Rate_Hysteresis_Rods.jpg" alt="..." />
+      <figcaption>Detumbling simulation: angular velocity decay with hysteresis rods.</figcaption>
+    </figure>
     <h3>Active magnetorquer control</h3>
-    <p>The design was later upgraded to active control: three-axis magnetorquers driven by an H-bridge actuation stage, with control laws targeting both detumbling and nadir-pointing. Attitude dynamics, magnetic-field models, and actuator saturation were simulated end-to-end in MATLAB / Simulink.</p>
+    <p>The design was later upgraded to active control: three-axis magnetorquers driven by an H-bridge actuation stage, with control laws targeting both detumbling and nadir-pointing. Attitude dynamics, magnetic-field models, and actuator saturation were simulated end-to-end in MATLAB.</p>
+    <figure class="case-figure r">
+      <img src="../../images/portfolio/Angular_Rate_Magnetorquers.jpg" alt="..." />
+      <figcaption>Active magnetorquer control: angular velocity decay with magnetorquers.</figcaption>
+    </figure>
   </section>
 
   <section class="case-section r">
@@ -483,7 +508,7 @@
 <!-- BOTTOM NAV -->
 <div class="case-bottom-nav">
   <a href="../">← All projects</a>
-  <a href="../adcs-helmholtz/">ADCS Simulation with Helmholtz Coils →</a>
+  <a href="../helmholtz-testbed/">Helmholtz Coils Testbed →</a>
 </div>
 
 <!-- FOOTER -->

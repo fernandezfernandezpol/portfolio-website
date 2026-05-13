@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Get in touch with Pol Fernández — currently looking for a curricular internship in telecommunications." />
+    content="Get in touch with Pol Fernandez - currently looking for a curricular internship in telecommunications." />
   <title>Contact | Pol Fernández</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicons/favicon.svg" />
   <link rel="icon" type="image/png" href="../images/favicons/favicon.png" />
@@ -618,7 +618,7 @@
 
     <!-- 1. INTRO -->
     <p class="contact-intro r">
-      I'm currently looking for a curricular internship in the telecommunications field. If your company offers this
+      I'm currently looking for a curricular internship in the aerospace or telecommunications fields. If your company offers this
       kind of opportunity and you think I might be a good fit, I'd be glad to hear from you.
     </p>
 
@@ -660,7 +660,7 @@
 
           <div class="field" id="f-message">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell me how I can help…"></textarea>
+            <textarea id="message" name="message" placeholder="Tell me how I can help..."></textarea>
             <span class="form-error">Required field.</span>
           </div>
 
@@ -669,7 +669,7 @@
 
         <div class="form-success" id="success">
           <strong>Thanks!</strong>
-          <p>Your message has been sent! You'll receive a confirmation email shortly. I'll get back to you as soon as possible.</p>
+          <p>Your message has been sent! You'll receive a confirmation email shortly, and I'll get back to you as soon as possible.</p>
         </div>
       </div>
 
@@ -799,7 +799,7 @@
       if (!validate()) return;
 
       btn.disabled = true;
-      btn.textContent = 'Sending…';
+      btn.textContent = 'Sending...';
       try {
         const res = await fetch(ENDPOINT, {
           method: 'POST',

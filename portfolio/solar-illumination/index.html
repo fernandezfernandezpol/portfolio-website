@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Illumination System for Solar Simulation — hardware setup at the UPC NanoSat Lab to replicate solar lighting for orbital experiments." />
+  <meta name="description" content="Illumination System for Solar Simulation - hardware setup at the UPC NanoSat Lab to replicate solar lighting for orbital experiments." />
   <title>Illumination System for Solar Simulation | Pol Fernández</title>
   <link rel="icon" type="image/svg+xml" href="../../images/favicons/favicon.svg" />
   <link rel="icon" type="image/png" href="../../images/favicons/favicon.png" />
@@ -214,7 +214,7 @@
       line-height: 1.85;
     }
     .case-section ul li::before {
-      content: "—";
+      content: "-";
       position: absolute;
       left: 0;
       color: var(--warm);
@@ -263,7 +263,6 @@
       max-width: var(--max);
       margin: 0 auto;
       padding: clamp(2rem, 4vw, 3rem) var(--pad);
-      border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; flex-wrap: wrap;
     }
@@ -421,29 +420,40 @@
 
   <section class="case-section r">
     <h2>Overview</h2>
-    <p>A hardware illumination system designed to replicate solar lighting conditions for simulated orbital environments, developed at the UPC NanoSat Lab. The setup acts as the "sun" inside the lab so that solar-sensor and thermal experiments can be run on the ground with conditions close to those of a satellite in orbit.</p>
+    <p>A hardware illumination system designed and assembled to replicate the varying solar angle experienced by a satellite in a Sun-synchronous low Earth orbit (SSO LEO), developed at the UPC NanoSat Lab. The setup acts as the "sun" inside the lab so that solar-sensor and thermal experiments can be run on the ground with lighting conditions representative of a real orbital pass.</p>
     <div class="case-tags">
       <span class="case-tag">Hardware</span>
       <span class="case-tag">Electronics</span>
       <span class="case-tag">NanoSat Lab</span>
-      <span class="case-tag">Orbital simulation</span>
+      <span class="case-tag">SSO LEO simulation</span>
     </div>
   </section>
 
   <section class="case-section r">
+    <h2>Context</h2>
+    <h3>The limitation of a fixed source</h3>
+    <p>The lab previously relied on a fixed solar cannon, a single collimated light source pointed at the satellite mockup from a static position. While adequate for calibration at a single illumination angle, it could not reproduce the continuous change in solar incidence angle that a satellite experiences as it travels along an SSO LEO orbit, limiting the fidelity of any dynamic solar experiment.</p>
+    <figure class="case-figure r">
+      <img src="../../images/portfolio/SolarCanon.jpg" alt="Previous fixed solar cannon at NanoSat Lab" />
+      <figcaption>Previous fixed solar cannon on the NanoSat Lab testbench.<br>(Credits: Nanoavionics)</figcaption>
+    </figure>
+  </section>
+
+  <section class="case-section r">
     <h2>What I built</h2>
-    <h3>Hardware setup</h3>
-    <p>An illumination rig that recreates the spectral and intensity characteristics of solar lighting for laboratory experiments. The system was designed end-to-end alongside the rest of the orbital-simulation testbench at the NanoSat Lab.</p>
+    <h3>Wooden solar arc</h3>
+    <p>I designed and assembled a wooden arc structure spanning a quarter circle, with seven bulbs evenly distributed along its length. Each bulb illuminates the satellite mockup from a different angle, together covering the range of solar incidence angles that a satellite encounters during an SSO LEO pass. The bulbs are switched individually by a relay module commanded over Ethernet by the ADCS simulation application, so the orbital illumination profile runs in sync with the rest of the testbench without any manual intervention.</p>
     <h3>Documentation &amp; reproducibility</h3>
-    <p>All firmware, control code, wiring diagrams, and experimental procedures were documented rigorously so that future students and researchers can reproduce experiments and extend the rig without rebuilding institutional knowledge from scratch.</p>
+    <p>All wiring, bulb specifications, structural dimensions, and operating procedures were documented so that future students and researchers can reproduce experiments and extend the system without rebuilding institutional knowledge from scratch.</p>
   </section>
 
   <section class="case-section r">
     <h2>Highlights</h2>
     <ul>
-      <li>Hardware design tailored to the NanoSat Lab's existing orbital-simulation testbench.</li>
-      <li>Full documentation of code, wiring, and procedures aimed at long-term reproducibility.</li>
-      <li>Built to integrate with the lab's other simulation systems (Helmholtz coils, motion stages).</li>
+      <li>Quarter-arc wooden structure with 7 bulbs to reproduce the solar angle variation of SSO LEO orbits.</li>
+      <li>Replaces a fixed solar cannon with a dynamic, multi-angle illumination system.</li>
+      <li>Designed to integrate with the lab's existing orbital-simulation testbench (Helmholtz coils).</li>
+      <li>Full documentation of structure, wiring, and procedures for long-term reproducibility.</li>
     </ul>
   </section>
 
@@ -461,7 +471,7 @@
 
 <!-- BOTTOM NAV -->
 <div class="case-bottom-nav">
-  <a href="../adcs-helmholtz/">← ADCS Simulation with Helmholtz Coils</a>
+  <a href="../helmholtz-testbed/">← ADCS Simulation with Helmholtz Coils</a>
   <a href="../">All projects →</a>
 </div>
 

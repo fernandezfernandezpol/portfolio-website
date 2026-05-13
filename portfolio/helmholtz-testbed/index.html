@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ADCS Simulation with Helmholtz Coils — real-time MATLAB simulation and control app for orbital experiments, with camera-based angular rate estimation." />
-  <title>ADCS Simulation with Helmholtz Coils | Pol Fernández</title>
+  <meta name="description" content="Helmholtz Coils Testbed - real-time MATLAB simulation and control app for orbital experiments, with camera-based angular rate estimation." />
+  <title>Helmholtz Coils Testbed| Pol Fernández</title>
   <link rel="icon" type="image/svg+xml" href="../../images/favicons/favicon.svg" />
   <link rel="icon" type="image/png" href="../../images/favicons/favicon.png" />
   <link rel="apple-touch-icon" href="../../images/favicons/apple-touch-icon.png" />
@@ -214,7 +214,7 @@
       line-height: 1.85;
     }
     .case-section ul li::before {
-      content: "—";
+      content: "-";
       position: absolute;
       left: 0;
       color: var(--warm);
@@ -263,7 +263,6 @@
       max-width: var(--max);
       margin: 0 auto;
       padding: clamp(2rem, 4vw, 3rem) var(--pad);
-      border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; flex-wrap: wrap;
     }
@@ -406,8 +405,8 @@
 <!-- PAGE HEADER -->
 <div class="page-header r">
   <div>
-    <p class="page-kicker">Case study · 2025</p>
-    <h1 class="page-title">ADCS Simulation with Helmholtz Coils</h1>
+    <p class="page-kicker">2025 - Present</p>
+    <h1 class="page-title">Helmholtz Coils Testbed</h1>
   </div>
   <a href="../" class="page-back">← Portfolio</a>
 </div>
@@ -416,43 +415,60 @@
 <main class="case-wrap">
 
   <figure class="case-hero-figure r">
-    <img src="../../images/portfolio/HCApp.jpg" alt="ADCS simulation with Helmholtz coils" />
+    <img src="../../images/portfolio/HCApp.jpg" alt="Helmholtz coils Testbed" />
   </figure>
 
   <section class="case-section r">
     <h2>Overview</h2>
-    <p>A real-time MATLAB simulation and control application for orbital experiments using Helmholtz coils. The system reproduces the magnetic environment a satellite would face in orbit and lets us test attitude-control strategies on hardware before flight.</p>
+    <p>A unified MATLAB application built for the NanoSat Lab three-axis Helmholtz coil Testbed. It integrates hardware control, orbit simulation, attitude measurement and data logging into a single interface, replacing a fragmented workflow of independent scripts and manual coordination between subsystems.</p>
+    <p>The goal is to let a researcher select an orbital scenario, run the experiment and export the results without switching between tools.</p>
     <div class="case-tags">
-      <span class="case-tag">MATLAB</span>
+      <span class="case-tag">MATLAB App Designer</span>
       <span class="case-tag">Helmholtz coils</span>
+      <span class="case-tag">ADCS</span>
       <span class="case-tag">Computer Vision</span>
-      <span class="case-tag">Control</span>
+      <span class="case-tag">SGP4 / IGRF</span>
+      <span class="case-tag">Hardware control</span>
     </div>
   </section>
 
   <section class="case-section r">
-    <h2>What I built</h2>
-    <h3>Real-time simulation app</h3>
-    <p>The app drives the Helmholtz-coil currents in real time to recreate the geomagnetic field expected along an orbit, while running the satellite's attitude dynamics in parallel so the magnetic environment and the spacecraft state stay synchronised throughout the experiment.</p>
-    <h3>Camera-based angular rate estimation</h3>
-    <p>Instead of relying solely on inertial sensors, angular rates are estimated from a camera looking at the test article — feature tracking gives a redundant motion measurement that is useful both for ground-test debugging and for closing the loop on visual cues.</p>
+    <h2>Context</h2>
+    <h3>The Testbed</h3>
+    <p>A three-axis Helmholtz coil system can generate a controlled, near-uniform magnetic field at its centre by driving independent current through three pairs of orthogonal coils. The NanoSat Lab Testbed places a satellite mockup at that centre and exposes it to any target field vector, including time-varying ones that follow a real orbital profile. A BK Precision power supply drives the coils and an microcontroller relay board switches current polarity to cover all field directions.</p>
+    <figure class="case-figure r">
+      <img src="../../images/portfolio/HelmholtzCoils.jpg" alt="Three-axis Helmholtz coil Testbed at NanoSat Lab" />
+      <figcaption>NanoSat Lab three-axis Helmholtz coil Testbed.<br>(Credits: Nanoavionics)</figcaption>
+    </figure>
   </section>
+
+  <section class="case-section r">
+    <h2>What I built</h2>
+    <h3>Camera-based attitude measurement</h3>
+    <p>I built a computer-vision module that uses a USB camera to track AprilTag markers attached to the satellite mockup and estimate its angular position and rate throughout the experiment. This provides an independent, optical measurement channel that complements any onboard ADCS sensors.</p>
+
+    <h3>Orbit simulation and field control</h3>
+    <p>I modernised, optimised and integrated the existing simulation and hardware-control codebase into the application. This covered the SGP4 orbit propagator and IGRF magnetic field model, as well as the coil current control routines that translate the computed field vector into the correct current commands for each coil axis. The result is a unified, real-time pipeline that replaces a set of standalone scripts with a single interface handling both simulation and hardware in lockstep. A static mode is also available for single-point calibration tests where a fixed, known field is needed.</p>
+
+    </section>
 
   <section class="case-section r">
     <h2>Highlights</h2>
     <ul>
-      <li>Real-time control of Helmholtz coil currents synchronised with the simulated orbital position.</li>
-      <li>Camera-based angular rate estimation as an independent motion-tracking channel.</li>
-      <li>MATLAB control app with a unified interface for running, logging, and replaying experiments.</li>
+      <li>Centralised control of the full experiment: hardware, simulation, measurement and logging from one interface.</li>
+      <li>Real-time coil current control following SGP4 + IGRF orbital field profiles.</li>
+      <li>Static and orbital simulation modes for calibration and full mission-profile tests.</li>
+      <li>Optical attitude estimation via AprilTag detection and Kalman filtering from two camera views.</li>
+      <li>Session save and reload for reproducible experiments and offline analysis.</li>
     </ul>
   </section>
 
   <!--
     To add more images or gifs to this page, drop them into
-    /images/portfolio/adcs-helmholtz/ and copy this block:
+    /images/portfolio/helmholtz-Testbed/ and copy this block:
 
     <figure class="case-figure r">
-      <img src="../../images/portfolio/adcs-helmholtz/your-file.gif" alt="..." />
+      <img src="../../images/portfolio/helmholtz-Testbed/your-file.gif" alt="..." />
       <figcaption>Your caption.</figcaption>
     </figure>
   -->
